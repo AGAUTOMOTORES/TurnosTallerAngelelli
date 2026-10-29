@@ -125,11 +125,11 @@
   <!-- TOAST NOTIFICATIONS -->
   <div id="toast-container" class="fixed top-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
-  <!-- NAVBAR -->
-  <header class="fixed top-0 inset-x-0 z-40 bg-carbon-950/85 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <!-- NAVBAR UNIFICADO Y DISEÑO PROFESIONAL -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-carbon-950/95 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Logo Oficial con glow -->
+      <!-- Logo Oficial -->
       <a href="#" class="flex items-center gap-3 group">
         <div class="relative">
           <img src="logo.jpg" alt="Logo Taller Angelelli" 
@@ -147,7 +147,7 @@
       </a>
 
       <!-- Navegación Desktop -->
-      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-300">
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-300">
         <a href="#trabajos" class="hover:text-brand transition-colors">Trabajos</a>
         <a href="#servicios" class="hover:text-brand transition-colors">Especialidades</a>
         <a href="#turnos" class="hover:text-brand transition-colors">Sacar Turno</a>
@@ -169,42 +169,44 @@
         </a>
       </div>
     </div>
-  </header>
 
-  <!-- BARRA DE ACCESO RÁPIDO / BUSCADOR STICKY (NUEVO) -->
-  <div class="sticky top-20 z-30 bg-carbon-950/90 backdrop-blur-md border-b border-white/10 py-2.5 px-4 shadow-xl">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-      <!-- Accesos Rápidos -->
-      <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
-        <a href="#turnos" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand text-white font-bold text-xs shrink-0 shadow-md shadow-brand/20">
-          <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-          <span>Sacar Turno</span>
-        </a>
-        <a href="#trabajos" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10">
-          <i data-lucide="car" class="w-3.5 h-3.5 text-brand"></i>
-          <span>Autos Arreglados</span>
-        </a>
-        <a href="#servicios" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10">
-          <i data-lucide="wrench" class="w-3.5 h-3.5 text-brand"></i>
-          <span>Especialidades</span>
-        </a>
-        <a href="#contacto" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10">
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand"></i>
-          <span>Ubicación</span>
-        </a>
-      </div>
+    <!-- BARRA DE ACCESO RÁPIDO INTEGRADA Y FLUIDA (SIN DESBORDAMIENTOS) -->
+    <div class="bg-carbon-900 border-t border-white/10 py-2.5 px-4 shadow-inner">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+        
+        <!-- Accesos directos responsivos (Sin desbordar pantalla en móvil) -->
+        <div class="flex items-center justify-center sm:justify-start flex-wrap gap-1.5 w-full sm:w-auto">
+          <a href="#turnos" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-brand text-white font-bold text-xs shrink-0 shadow-md shadow-brand/20 hover:bg-brand-hover transition">
+            <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+            <span>Turno</span>
+          </a>
+          <a href="#trabajos" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10 transition">
+            <i data-lucide="car" class="w-3.5 h-3.5 text-brand"></i>
+            <span>Autos</span>
+          </a>
+          <a href="#servicios" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10 transition">
+            <i data-lucide="wrench" class="w-3.5 h-3.5 text-brand"></i>
+            <span>Servicios</span>
+          </a>
+          <a href="#contacto" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10 transition">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand"></i>
+            <span>Ubicación</span>
+          </a>
+        </div>
 
-      <!-- Buscador Rápido Global -->
-      <div class="relative w-full md:w-72">
-        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400"></i>
-        <input type="text" id="buscador-header-rapido" placeholder="Buscar vehículo o servicio..." 
-               class="w-full pl-9 pr-3 py-1.5 rounded-lg bg-carbon-900 border border-zinc-800 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-brand transition">
+        <!-- Buscador Rápido Global -->
+        <div class="relative w-full sm:w-72">
+          <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400"></i>
+          <input type="text" id="buscador-header-rapido" placeholder="Buscar vehículo o servicio..." 
+                 class="w-full pl-9 pr-3 py-1.5 rounded-lg bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-brand transition">
+        </div>
+
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- HERO SECTION -->
-  <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+  <section class="relative pt-40 pb-16 sm:pt-48 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
     <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[320px] bg-brand/15 blur-[160px] rounded-full pointer-events-none"></div>
 
     <div class="relative text-center max-w-3xl mx-auto">
@@ -338,7 +340,7 @@
     </div>
   </section>
 
-  <!-- SECCIÓN: TRABAJOS REALIZADOS (OPTIMIZADO EN 2 COLUMNAS PARA CELULAR) -->
+  <!-- SECCIÓN: TRABAJOS REALIZADOS (2 COLUMNAS EN CELULAR) -->
   <section id="trabajos" class="py-16 relative">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       
@@ -389,7 +391,7 @@
         </div>
       </div>
 
-      <!-- Grid de Autos: 2 COLUMNAS EN CELULAR (grid-cols-2) y 3 en desktop -->
+      <!-- Grid de Autos: 2 Columnas en Celular (grid-cols-2) y 3 en Desktop -->
       <div id="grid-trabajos" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         <!-- Inyectado dinámicamente por JS -->
       </div>
@@ -1065,10 +1067,8 @@
       modal.classList.remove("flex");
     });
 
-    // Filtros de búsqueda (tanto en sección como en el buscador superior sticky)
     const handleBusquedaInput = (e) => {
       busquedaActiva = e.target.value.toLowerCase().trim();
-      // Sincronizar ambos inputs de búsqueda si existen
       const inputSeccion = document.getElementById("input-buscar-trabajo");
       const inputHeader = document.getElementById("buscador-header-rapido");
       if(inputSeccion && inputSeccion !== e.target) inputSeccion.value = e.target.value;
