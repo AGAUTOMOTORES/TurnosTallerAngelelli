@@ -122,29 +122,25 @@
 </head>
 <body class="selection:bg-brand selection:text-white min-h-screen flex flex-col font-sans">
 
-  <!-- ============================================================ -->
-  <!-- TOAST NOTIFICATIONS (Reemplazo de los alerts del navegador)   -->
-  <!-- ============================================================ -->
+  <!-- TOAST NOTIFICATIONS -->
   <div id="toast-container" class="fixed top-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
-  <!-- ============================================================ -->
-  <!-- NAVBAR                                                       -->
-  <!-- ============================================================ -->
+  <!-- NAVBAR -->
   <header class="fixed top-0 inset-x-0 z-40 bg-carbon-950/85 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Logo Oficial con glow -->
-      <a href="#" class="flex items-center gap-3.5 group">
+      <a href="#" class="flex items-center gap-3 group">
         <div class="relative">
           <img src="logo.jpg" alt="Logo Taller Angelelli" 
-               class="w-12 h-12 rounded-full object-cover border-2 border-brand shadow-lg shadow-brand/25 group-hover:scale-105 transition-transform duration-300">
-          <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-carbon-950 animate-pulse"></span>
+               class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-brand shadow-lg shadow-brand/25 group-hover:scale-105 transition-transform duration-300">
+          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-carbon-950 animate-pulse"></span>
         </div>
         <div>
-          <span class="block font-display font-black text-xl tracking-wider text-white uppercase leading-none">
+          <span class="block font-display font-black text-base sm:text-xl tracking-wider text-white uppercase leading-none">
             Taller <span class="text-brand">Angelelli</span>
           </span>
-          <span class="text-[11px] font-semibold tracking-widest text-zinc-400 uppercase">
+          <span class="text-[10px] sm:text-[11px] font-semibold tracking-widest text-zinc-400 uppercase">
             La Rioja • Mecánica
           </span>
         </div>
@@ -159,16 +155,15 @@
         <a href="#contacto" class="hover:text-brand transition-colors">Ubicación</a>
       </nav>
 
-      <!-- Estado en Vivo (Abierto/Cerrado) + Botón WhatsApp -->
-      <div class="flex items-center gap-3">
-        <!-- Indicador dinámico de estado del taller -->
+      <!-- Estado en Vivo + Botón WhatsApp -->
+      <div class="flex items-center gap-2 sm:gap-3">
         <div id="estado-taller-nav" class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-carbon-850 border border-white/10 text-xs font-semibold">
           <span id="dot-estado" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span id="texto-estado" class="text-zinc-300">Consultando...</span>
         </div>
 
         <a href="https://wa.me/5493804374962?text=Hola%20Taller%20Angelelli,%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer" 
-           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/40 hover:scale-[1.02]">
+           class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/25">
           <i data-lucide="message-circle" class="w-4 h-4"></i>
           <span class="hidden sm:inline">WhatsApp</span>
         </a>
@@ -176,443 +171,440 @@
     </div>
   </header>
 
-  <!-- ============================================================ -->
-  <!-- HERO SECTION                                                 -->
-  <!-- ============================================================ -->
-  <section class="relative pt-36 pb-20 sm:pt-48 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-    
-    <!-- Luces de fondo deportivas -->
+  <!-- BARRA DE ACCESO RÁPIDO / BUSCADOR STICKY (NUEVO) -->
+  <div class="sticky top-20 z-30 bg-carbon-950/90 backdrop-blur-md border-b border-white/10 py-2.5 px-4 shadow-xl">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <!-- Accesos Rápidos -->
+      <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
+        <a href="#turnos" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand text-white font-bold text-xs shrink-0 shadow-md shadow-brand/20">
+          <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+          <span>Sacar Turno</span>
+        </a>
+        <a href="#trabajos" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10">
+          <i data-lucide="car" class="w-3.5 h-3.5 text-brand"></i>
+          <span>Autos Arreglados</span>
+        </a>
+        <a href="#servicios" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10">
+          <i data-lucide="wrench" class="w-3.5 h-3.5 text-brand"></i>
+          <span>Especialidades</span>
+        </a>
+        <a href="#contacto" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-300 font-medium text-xs shrink-0 border border-white/10">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand"></i>
+          <span>Ubicación</span>
+        </a>
+      </div>
+
+      <!-- Buscador Rápido Global -->
+      <div class="relative w-full md:w-72">
+        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400"></i>
+        <input type="text" id="buscador-header-rapido" placeholder="Buscar vehículo o servicio..." 
+               class="w-full pl-9 pr-3 py-1.5 rounded-lg bg-carbon-900 border border-zinc-800 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-brand transition">
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
     <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[320px] bg-brand/15 blur-[160px] rounded-full pointer-events-none"></div>
 
     <div class="relative text-center max-w-3xl mx-auto">
-      
-      <!-- Insignia animada -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-carbon-850/80 border border-white/10 text-xs font-semibold text-white mb-8 shadow-sm backdrop-blur-md">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-carbon-850/80 border border-white/10 text-xs font-semibold text-white mb-6 shadow-sm backdrop-blur-md">
         <span class="w-2 h-2 rounded-full bg-brand animate-ping"></span>
         <span class="text-zinc-300">Taller Mecánico Oficial en La Rioja Capital</span>
       </div>
 
-      <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.05]">
+      <h1 class="font-display font-black text-3xl sm:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[1.05]">
         Mecánica de Alta Precisión y <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand via-red-500 to-rose-200">Confianza Total</span>
       </h1>
 
-      <p class="mt-6 text-base sm:text-lg text-zinc-300 font-normal leading-relaxed max-w-2xl mx-auto">
+      <p class="mt-4 text-sm sm:text-lg text-zinc-300 font-normal leading-relaxed max-w-2xl mx-auto">
         Diagnóstico computarizado, mantenimiento programado y reparaciones con repuestos de primera línea. Revisa nuestros autos entregados o solicita tu turno por WhatsApp en segundos.
       </p>
 
-      <!-- Botones de Acción -->
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#turnos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-brand to-brand-hover text-white font-bold text-sm tracking-wide uppercase transition-all shadow-xl shadow-brand/30 hover:scale-[1.02] hover:shadow-brand/50">
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="#turnos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-brand to-brand-hover text-white font-bold text-xs sm:text-sm tracking-wide uppercase transition-all shadow-xl shadow-brand/30 hover:scale-[1.02]">
           <i data-lucide="calendar" class="w-4 h-4"></i>
           <span>Solicitar Turno por WhatsApp</span>
         </a>
-        <a href="#trabajos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-carbon-850 hover:bg-carbon-800 text-zinc-200 font-semibold text-sm border border-white/10 transition-all hover:border-white/20">
-          <span>Ver Trabajos Realizados</span>
+        <a href="#trabajos" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-carbon-850 hover:bg-carbon-800 text-zinc-200 font-semibold text-xs sm:text-sm border border-white/10 transition-all">
+          <span>Ver Autos Arreglados</span>
           <i data-lucide="arrow-down" class="w-4 h-4 text-zinc-400"></i>
         </a>
       </div>
 
-      <!-- 3 TARJETAS DE INFORMACIÓN CLAVE (Reemplazando el número anterior) -->
-      <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-10 border-t border-white/5 max-w-3xl mx-auto">
-        
-        <div class="spotlight-card p-5 rounded-2xl flex flex-col justify-center items-center">
-          <div class="w-8 h-8 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-2">
+      <!-- Tarjetas de Información Clave -->
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3 pt-8 border-t border-white/5 max-w-3xl mx-auto">
+        <div class="spotlight-card p-4 rounded-xl flex flex-col justify-center items-center">
+          <div class="w-7 h-7 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-1.5">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
           </div>
-          <span class="block font-display font-black text-2xl text-white">100%</span>
-          <span class="text-xs text-zinc-400 font-medium">Trabajos Garantizados</span>
+          <span class="block font-display font-black text-xl text-white">100%</span>
+          <span class="text-[11px] text-zinc-400 font-medium">Trabajos Garantizados</span>
         </div>
 
-        <div class="spotlight-card p-5 rounded-2xl flex flex-col justify-center items-center border-brand/20">
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2">
+        <div class="spotlight-card p-4 rounded-xl flex flex-col justify-center items-center border-brand/20">
+          <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-1.5">
             <i data-lucide="clock" class="w-4 h-4"></i>
           </div>
-          <span class="block font-display font-black text-xl text-white tracking-tight">8 a 13 • 17 a 21</span>
-          <span class="text-xs text-zinc-400 font-medium">Lunes a Sábado</span>
+          <span class="block font-display font-black text-lg text-white tracking-tight">8 a 13 • 17 a 21</span>
+          <span class="text-[11px] text-zinc-400 font-medium">Lunes a Sábado</span>
         </div>
 
-        <div class="spotlight-card p-5 rounded-2xl flex flex-col justify-center items-center">
-          <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2">
+        <div class="spotlight-card p-4 rounded-xl flex flex-col justify-center items-center">
+          <div class="w-7 h-7 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center mb-1.5">
             <i data-lucide="map-pin" class="w-4 h-4"></i>
           </div>
-          <span class="block font-display font-black text-2xl text-white">La Rioja</span>
-          <span class="text-xs text-zinc-400 font-medium">Ubicación y Fácil Acceso</span>
+          <span class="block font-display font-black text-xl text-white">La Rioja</span>
+          <span class="text-[11px] text-zinc-400 font-medium">Ubicación y Fácil Acceso</span>
         </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- SECCIÓN: ESPECIALIDADES / SERVICIOS                          -->
-  <!-- ============================================================ -->
-  <section id="servicios" class="py-20 bg-carbon-900/30 border-y border-white/5">
+  <!-- SECCIÓN: ESPECIALIDADES / SERVICIOS -->
+  <section id="servicios" class="py-16 bg-carbon-900/35 border-y border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
         <span class="text-brand font-semibold text-xs tracking-widest uppercase">Lo que Hacemos</span>
-        <h2 class="mt-2 font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
+        <h2 class="mt-2 font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight">
           Nuestras Especialidades
         </h2>
-        <p class="mt-2 text-zinc-400 text-sm">
+        <p class="mt-2 text-zinc-400 text-xs sm:text-sm">
           Equipamiento y herramientas especializadas para vehículos nacionales e importados.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <div class="spotlight-card p-6 rounded-2xl reveal">
-          <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-4">
-            <i data-lucide="cpu" class="w-6 h-6"></i>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div class="spotlight-card p-5 rounded-xl reveal">
+          <div class="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-3">
+            <i data-lucide="cpu" class="w-5 h-5"></i>
           </div>
-          <h3 class="font-display font-bold text-lg text-white">Inyección Electrónica</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+          <h3 class="font-display font-bold text-base text-white">Inyección Electrónica</h3>
+          <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
             Escaneo y diagnóstico computarizado multimarca, limpieza de inyectores por ultrasonido y calibración de sensores.
           </p>
         </div>
 
-        <div class="spotlight-card p-6 rounded-2xl reveal">
-          <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-4">
-            <i data-lucide="git-commit" class="w-6 h-6"></i>
+        <div class="spotlight-card p-5 rounded-xl reveal">
+          <div class="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-3">
+            <i data-lucide="git-commit" class="w-5 h-5"></i>
           </div>
-          <h3 class="font-display font-bold text-lg text-white">Distribución y Correas</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+          <h3 class="font-display font-bold text-base text-white">Distribución y Correas</h3>
+          <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
             Reemplazo preventivo de kit de distribución, bomba de agua, tensores y correas poli-V con puesta a punto exacta.
           </p>
         </div>
 
-        <div class="spotlight-card p-6 rounded-2xl reveal">
-          <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-4">
-            <i data-lucide="disc" class="w-6 h-6"></i>
+        <div class="spotlight-card p-5 rounded-xl reveal">
+          <div class="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-3">
+            <i data-lucide="disc" class="w-5 h-5"></i>
           </div>
-          <h3 class="font-display font-bold text-lg text-white">Frenos de Precisión</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+          <h3 class="font-display font-bold text-base text-white">Frenos de Precisión</h3>
+          <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
             Cambio de pastillas, rectificado de discos, purgado electrónico del sistema ABS y mantenimiento de cintas y tambores.
           </p>
         </div>
 
-        <div class="spotlight-card p-6 rounded-2xl reveal">
-          <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-4">
-            <i data-lucide="navigation-2" class="w-6 h-6"></i>
+        <div class="spotlight-card p-5 rounded-xl reveal">
+          <div class="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-3">
+            <i data-lucide="navigation-2" class="w-5 h-5"></i>
           </div>
-          <h3 class="font-display font-bold text-lg text-white">Tren Delantero y Suspensión</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+          <h3 class="font-display font-bold text-base text-white">Tren Delantero y Suspensión</h3>
+          <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
             Amortiguadores, bujes, cazoletas, extremos y rótulas para garantizar confort de marcha y máxima seguridad.
           </p>
         </div>
 
-        <div class="spotlight-card p-6 rounded-2xl reveal">
-          <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-4">
-            <i data-lucide="droplet" class="w-6 h-6"></i>
+        <div class="spotlight-card p-5 rounded-xl reveal">
+          <div class="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-3">
+            <i data-lucide="droplet" class="w-5 h-5"></i>
           </div>
-          <h3 class="font-display font-bold text-lg text-white">Service y Mantenimiento</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+          <h3 class="font-display font-bold text-base text-white">Service y Mantenimiento</h3>
+          <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
             Cambio de aceite sintético/semisintético de primeras marcas, filtros de aire, aceite, combustible y habitáculo.
           </p>
         </div>
 
-        <div class="spotlight-card p-6 rounded-2xl reveal">
-          <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-4">
-            <i data-lucide="settings-2" class="w-6 h-6"></i>
+        <div class="spotlight-card p-5 rounded-xl reveal">
+          <div class="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-3">
+            <i data-lucide="settings-2" class="w-5 h-5"></i>
           </div>
-          <h3 class="font-display font-bold text-lg text-white">Embragues y Caja</h3>
-          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+          <h3 class="font-display font-bold text-base text-white">Embragues y Caja</h3>
+          <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
             Sustitución de placa, disco, crapodina hidráulica o mecánica, rectificado de volante y regulación precisa.
           </p>
         </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- SECCIÓN: TRABAJOS REALIZADOS (CON BUSCADOR Y FILTRO EN VIVO) -->
-  <!-- ============================================================ -->
-  <section id="trabajos" class="py-24 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- SECCIÓN: TRABAJOS REALIZADOS (OPTIMIZADO EN 2 COLUMNAS PARA CELULAR) -->
+  <section id="trabajos" class="py-16 relative">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 reveal">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 reveal">
         <div>
           <span class="text-brand font-semibold text-xs tracking-widest uppercase">Galería de Entregas</span>
-          <h2 class="mt-2 font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
-            Trabajos Realizados
+          <h2 class="mt-1 font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight">
+            Autos Arreglados
           </h2>
-          <p class="mt-2 text-zinc-400 text-sm sm:text-base max-w-xl">
-            Haz clic en cualquier auto para ver la ficha completa en detalle.
+          <p class="mt-1 text-zinc-400 text-xs sm:text-base max-w-xl">
+            Haz clic en cualquier vehículo para ver los detalles completos del trabajo realizado.
           </p>
         </div>
 
         <!-- Contador dinámico -->
         <div class="flex items-center gap-2">
-          <span id="contador-trabajos" class="px-3.5 py-1.5 rounded-lg bg-carbon-850 border border-white/10 text-xs font-semibold text-zinc-300">
+          <span id="contador-trabajos" class="px-3 py-1 rounded-lg bg-carbon-850 border border-white/10 text-xs font-semibold text-zinc-300">
             Cargando trabajos...
           </span>
         </div>
       </div>
 
-      <!-- BUSCADOR EN VIVO Y FILTROS RÁPIDOS -->
-      <div class="mb-10 p-4 rounded-2xl bg-carbon-900/80 border border-white/10 flex flex-col sm:flex-row items-center gap-4 reveal">
+      <!-- Buscador en vivo y filtros rápidos -->
+      <div class="mb-8 p-3.5 sm:p-4 rounded-2xl bg-carbon-900/80 border border-white/10 flex flex-col sm:flex-row items-center gap-3 reveal">
         <div class="relative w-full sm:w-80">
           <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400"></i>
           <input type="text" id="input-buscar-trabajo" placeholder="Buscar por auto o arreglo (ej. Hilux, frenos...)"
-                 class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-brand transition">
+                 class="w-full pl-10 pr-4 py-2 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-brand transition">
         </div>
 
         <!-- Chips de filtro rápido -->
-        <div class="flex items-center gap-2 overflow-x-auto w-full pb-1 sm:pb-0 text-xs">
-          <button class="filtro-btn px-3 py-1.5 rounded-lg bg-brand text-white font-semibold transition shrink-0" data-filtro="todos">
+        <div class="flex items-center gap-1.5 overflow-x-auto w-full pb-1 sm:pb-0 text-xs scrollbar-none">
+          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-brand text-white font-semibold transition shrink-0" data-filtro="todos">
             Todos
           </button>
-          <button class="filtro-btn px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="distribución">
+          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="distribución">
             Distribución
           </button>
-          <button class="filtro-btn px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="frenos">
+          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="frenos">
             Frenos
           </button>
-          <button class="filtro-btn px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="service">
+          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="service">
             Service
           </button>
-          <button class="filtro-btn px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="tren delantero">
+          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="tren delantero">
             Tren Delantero
           </button>
         </div>
       </div>
 
-      <!-- Contenedor del Grid de Autos -->
-      <div id="grid-trabajos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        <!-- Inyectado por JS -->
+      <!-- Grid de Autos: 2 COLUMNAS EN CELULAR (grid-cols-2) y 3 en desktop -->
+      <div id="grid-trabajos" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        <!-- Inyectado dinámicamente por JS -->
       </div>
 
       <!-- Estado vacío -->
-      <div id="estado-vacio" class="hidden text-center py-16 px-4 spotlight-card rounded-2xl max-w-lg mx-auto">
-        <div class="w-16 h-16 rounded-full bg-carbon-800 text-brand flex items-center justify-center mx-auto mb-4">
-          <i data-lucide="car" class="w-8 h-8"></i>
+      <div id="estado-vacio" class="hidden text-center py-12 px-4 spotlight-card rounded-2xl max-w-md mx-auto mt-6">
+        <div class="w-12 h-12 rounded-full bg-carbon-800 text-brand flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="car" class="w-6 h-6"></i>
         </div>
-        <h3 class="font-display font-bold text-lg text-white">No se encontraron trabajos</h3>
-        <p class="text-zinc-400 text-sm mt-1">Prueba con otra palabra en el buscador o agrega autos desde el panel admin.</p>
+        <h3 class="font-display font-bold text-base text-white">No se encontraron trabajos</h3>
+        <p class="text-zinc-400 text-xs mt-1">Prueba con otra palabra en el buscador o revisa los filtros.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- SECCIÓN: SACAR TURNO (WHATSAPP INTELIGENTE CON SELECTOR)     -->
-  <!-- ============================================================ -->
-  <section id="turnos" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative">
-    <div class="spotlight-card rounded-3xl p-6 sm:p-12 border border-white/10 relative overflow-hidden shadow-2xl">
-      
-      <!-- Glow decorativo -->
+  <!-- SECCIÓN: SACAR TURNO (WHATSAPP INTELIGENTE) -->
+  <section id="turnos" class="py-16 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative">
+    <div class="spotlight-card rounded-3xl p-5 sm:p-12 border border-white/10 relative overflow-hidden shadow-2xl">
       <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand/15 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         <!-- Información -->
         <div class="lg:col-span-5 reveal">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-400 mb-4">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-400 mb-3">
             <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
-            <span>Sin intermediarios ni registros</span>
+            <span>Sin intermediarios ni esperas</span>
           </div>
           
-          <h2 class="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight leading-tight">
+          <h2 class="font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight leading-tight">
             Saca tu turno fácil y directo por WhatsApp
           </h2>
           
-          <p class="mt-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
-            Completa estos datos o toca uno de los botones rápidos de servicio. Te generaremos un mensaje estructurado para coordinar el día y horario que mejor te quede directamente con nosotros.
+          <p class="mt-3 text-zinc-300 text-xs sm:text-base leading-relaxed">
+            Completa tus datos o toca un chip rápido de servicio. Te generaremos un mensaje listo para enviar y coordinar el día de ingreso al taller.
           </p>
 
-          <div class="mt-8 space-y-4">
+          <div class="mt-6 space-y-3">
             <div class="flex items-start gap-3">
-              <div class="w-8 h-8 rounded-lg bg-carbon-800 flex items-center justify-center text-brand shrink-0">
-                <i data-lucide="user" class="w-4 h-4"></i>
+              <div class="w-7 h-7 rounded-lg bg-carbon-800 flex items-center justify-center text-brand shrink-0">
+                <i data-lucide="user" class="w-3.5 h-3.5"></i>
               </div>
               <div>
                 <h4 class="text-xs font-bold text-white uppercase">Tu Nombre</h4>
-                <p class="text-xs text-zinc-400">Para saber con quién hablamos.</p>
+                <p class="text-[11px] text-zinc-400">Para saber con quién hablamos.</p>
               </div>
             </div>
 
             <div class="flex items-start gap-3">
-              <div class="w-8 h-8 rounded-lg bg-carbon-800 flex items-center justify-center text-brand shrink-0">
-                <i data-lucide="car-front" class="w-4 h-4"></i>
+              <div class="w-7 h-7 rounded-lg bg-carbon-800 flex items-center justify-center text-brand shrink-0">
+                <i data-lucide="car-front" class="w-3.5 h-3.5"></i>
               </div>
               <div>
                 <h4 class="text-xs font-bold text-white uppercase">Vehículo</h4>
-                <p class="text-xs text-zinc-400">Marca, modelo y año para preparar repuestos.</p>
+                <p class="text-[11px] text-zinc-400">Marca, modelo y año para preparar repuestos.</p>
               </div>
             </div>
 
             <div class="flex items-start gap-3">
-              <div class="w-8 h-8 rounded-lg bg-carbon-800 flex items-center justify-center text-brand shrink-0">
-                <i data-lucide="wrench" class="w-4 h-4"></i>
+              <div class="w-7 h-7 rounded-lg bg-carbon-800 flex items-center justify-center text-brand shrink-0">
+                <i data-lucide="wrench" class="w-3.5 h-3.5"></i>
               </div>
               <div>
                 <h4 class="text-xs font-bold text-white uppercase">Motivo de la Visita</h4>
-                <p class="text-xs text-zinc-400">Describe el arreglo o selecciona un chip rápido.</p>
+                <p class="text-[11px] text-zinc-400">Describe el arreglo o selecciona un chip rápido.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Formulario con chips rápidos de servicio -->
-        <div class="lg:col-span-7 bg-carbon-900/95 p-6 sm:p-8 rounded-2xl border border-white/10 shadow-2xl reveal">
-          <form id="form-turno" class="space-y-5">
+        <!-- Formulario -->
+        <div class="lg:col-span-7 bg-carbon-900/95 p-5 sm:p-8 rounded-2xl border border-white/10 shadow-2xl reveal">
+          <form id="form-turno" class="space-y-4">
             <div>
-              <label for="cliente-nombre" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">
+              <label for="cliente-nombre" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1.5">
                 Tu Nombre y Apellido *
               </label>
               <input type="text" id="cliente-nombre" required placeholder="Ej: Juan Pérez"
-                class="w-full px-4 py-3.5 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-brand transition text-sm">
+                class="w-full px-3.5 py-3 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-brand transition text-xs sm:text-sm">
             </div>
 
             <div>
-              <label for="cliente-vehiculo" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">
+              <label for="cliente-vehiculo" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1.5">
                 Vehículo (Marca, Modelo, Año) *
               </label>
               <input type="text" id="cliente-vehiculo" required placeholder="Ej: Toyota Hilux 2020 / VW Gol 1.6"
-                class="w-full px-4 py-3.5 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-brand transition text-sm">
+                class="w-full px-3.5 py-3 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-brand transition text-xs sm:text-sm">
             </div>
 
-            <!-- CHIPS RÁPIDOS DE SERVICIO (Agiliza al cliente) -->
+            <!-- Chips Rápidos de Servicio -->
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1.5">
                 Selección Rápida de Servicio:
               </label>
-              <div class="flex flex-wrap gap-2 mb-2.5">
-                <button type="button" class="chip-servicio px-3 py-1.5 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-xs text-zinc-300 hover:text-white transition">
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                <button type="button" class="chip-servicio px-2.5 py-1 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-[11px] text-zinc-300 hover:text-white transition">
                   🔧 Service Completo
                 </button>
-                <button type="button" class="chip-servicio px-3 py-1.5 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-xs text-zinc-300 hover:text-white transition">
+                <button type="button" class="chip-servicio px-2.5 py-1 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-[11px] text-zinc-300 hover:text-white transition">
                   ⚙️ Kit Distribución
                 </button>
-                <button type="button" class="chip-servicio px-3 py-1.5 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-xs text-zinc-300 hover:text-white transition">
+                <button type="button" class="chip-servicio px-2.5 py-1 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-[11px] text-zinc-300 hover:text-white transition">
                   🛑 Frenos / Pastillas
                 </button>
-                <button type="button" class="chip-servicio px-3 py-1.5 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-xs text-zinc-300 hover:text-white transition">
+                <button type="button" class="chip-servicio px-2.5 py-1 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-[11px] text-zinc-300 hover:text-white transition">
                   💻 Escaneo Computarizado
                 </button>
-                <button type="button" class="chip-servicio px-3 py-1.5 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-xs text-zinc-300 hover:text-white transition">
-                  🏎️ Tren Delantero
+                <button type="button" class="chip-servicio px-2.5 py-1 rounded-lg bg-carbon-950 hover:bg-carbon-800 border border-white/10 text-[11px] text-zinc-300 hover:text-white transition">
+                  🚗 Tren Delantero
                 </button>
               </div>
 
-              <textarea id="cliente-motivo" required rows="3" placeholder="Describe el problema o arreglo..."
-                class="w-full px-4 py-3.5 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-brand transition text-sm resize-none"></textarea>
+              <textarea id="cliente-motivo" required rows="2.5" placeholder="Describe el problema o arreglo..."
+                class="w-full px-3.5 py-3 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-brand transition text-xs sm:text-sm resize-none"></textarea>
             </div>
 
             <button type="submit"
-              class="w-full py-4 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm tracking-wide uppercase transition-all shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-3 hover:scale-[1.01]">
-              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              class="w-full py-3.5 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm tracking-wide uppercase transition-all shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2.5 hover:scale-[1.01]">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
               <span>Enviar Turno por WhatsApp</span>
             </button>
-            <p class="text-[11px] text-zinc-400 text-center">
+            <p class="text-[10px] text-zinc-400 text-center">
               Te responderemos enseguida para definir el día y la hora exacta de tu ingreso.
             </p>
           </form>
         </div>
 
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- SECCIÓN: PREGUNTAS FRECUENTES (ACCORDION PROFESIONAL)        -->
-  <!-- ============================================================ -->
-  <section id="preguntas" class="py-20 bg-carbon-900/30 border-y border-white/5">
+  <!-- SECCIÓN: PREGUNTAS FRECUENTES -->
+  <section id="preguntas" class="py-16 bg-carbon-900/35 border-y border-white/5">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
         <span class="text-brand font-semibold text-xs tracking-widest uppercase">Dudas Comunes</span>
-        <h2 class="mt-2 font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
+        <h2 class="mt-2 font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight">
           Preguntas Frecuentes
         </h2>
-        <p class="mt-2 text-zinc-400 text-sm">
+        <p class="mt-2 text-zinc-400 text-xs sm:text-sm">
           Todo lo que necesitas saber antes de traer tu vehículo al taller.
         </p>
       </div>
 
-      <div class="space-y-3.5 reveal">
-        
-        <!-- FAQ 1 -->
-        <div class="faq-item spotlight-card rounded-2xl overflow-hidden border border-white/10">
-          <button class="faq-btn w-full p-5 text-left font-display font-bold text-base text-white flex items-center justify-between gap-4">
+      <div class="space-y-3 reveal">
+        <div class="faq-item spotlight-card rounded-xl overflow-hidden border border-white/10">
+          <button class="faq-btn w-full p-4 text-left font-display font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
             <span>¿Qué medios de pago aceptan en el taller?</span>
-            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-zinc-400 transition-transform duration-300"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-zinc-400 transition-transform duration-300"></i>
           </button>
-          <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
+          <div class="faq-content hidden px-4 pb-4 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
             Aceptamos efectivo, transferencias bancarias directas (CBU/CVU) y todas las tarjetas de débito y crédito. Consulta por planes de cuotas en reparaciones mayores.
           </div>
         </div>
 
-        <!-- FAQ 2 -->
-        <div class="faq-item spotlight-card rounded-2xl overflow-hidden border border-white/10">
-          <button class="faq-btn w-full p-5 text-left font-display font-bold text-base text-white flex items-center justify-between gap-4">
+        <div class="faq-item spotlight-card rounded-xl overflow-hidden border border-white/10">
+          <button class="faq-btn w-full p-4 text-left font-display font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
             <span>¿Tienen garantía los trabajos realizados?</span>
-            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-zinc-400 transition-transform duration-300"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-zinc-400 transition-transform duration-300"></i>
           </button>
-          <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
+          <div class="faq-content hidden px-4 pb-4 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
             Sí, el 100% de nuestra mano de obra cuenta con garantía. Trabajamos exclusivamente con marcas de repuestos certificadas para garantizar durabilidad y seguridad.
           </div>
         </div>
 
-        <!-- FAQ 3 -->
-        <div class="faq-item spotlight-card rounded-2xl overflow-hidden border border-white/10">
-          <button class="faq-btn w-full p-5 text-left font-display font-bold text-base text-white flex items-center justify-between gap-4">
+        <div class="faq-item spotlight-card rounded-xl overflow-hidden border border-white/10">
+          <button class="faq-btn w-full p-4 text-left font-display font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
             <span>¿Cuánto tiempo demora un service estándar de aceite y filtros?</span>
-            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-zinc-400 transition-transform duration-300"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-zinc-400 transition-transform duration-300"></i>
           </button>
-          <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
+          <div class="faq-content hidden px-4 pb-4 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
             Un service periódico suele realizarse en el transcurso de la mañana o de la tarde (aproximadamente 2 a 3 horas con turno previo), incluyendo la revisión de niveles y puntos de seguridad.
           </div>
         </div>
 
-        <!-- FAQ 4 -->
-        <div class="faq-item spotlight-card rounded-2xl overflow-hidden border border-white/10">
-          <button class="faq-btn w-full p-5 text-left font-display font-bold text-base text-white flex items-center justify-between gap-4">
+        <div class="faq-item spotlight-card rounded-xl overflow-hidden border border-white/10">
+          <button class="faq-btn w-full p-4 text-left font-display font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
             <span>¿Puedo llevar yo mismo los repuestos para mi auto?</span>
-            <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-zinc-400 transition-transform duration-300"></i>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-zinc-400 transition-transform duration-300"></i>
           </button>
-          <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
-            Por supuesto. Puedes traer tus propios repuestos o nosotros nos encargamos de cotizártelos y conseguírtelos con nuestros distribuidores oficiales a precios convenientes.
+          <div class="faq-content hidden px-4 pb-4 text-xs sm:text-sm text-zinc-300 border-t border-white/5 pt-3 leading-relaxed">
+            Por supuesto. Puedes traer tus propios repuestos o nosotros nos encargamos de cotizártelos y conseguirtelos con nuestros distribuidores oficiales a precios convenientes.
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- SECCIÓN: HORARIOS Y CONTACTO                                 -->
-  <!-- ============================================================ -->
-  <section id="contacto" class="py-24 bg-carbon-900/40">
+  <!-- SECCIÓN: HORARIOS Y CONTACTO -->
+  <section id="contacto" class="py-16 bg-carbon-900/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
         <span class="text-brand font-semibold text-xs tracking-widest uppercase">Canales Oficiales</span>
-        <h2 class="mt-2 font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-tight">
+        <h2 class="mt-2 font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight">
           Horarios y Contacto
         </h2>
-        <p class="mt-2 text-zinc-400 text-sm sm:text-base">
+        <p class="mt-2 text-zinc-400 text-xs sm:text-sm">
           Te esperamos en nuestro taller en La Rioja para brindarte la mejor atención.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Horarios -->
-        <div class="spotlight-card p-6 sm:p-7 rounded-2xl flex flex-col justify-between border-brand/30 reveal">
+        <div class="spotlight-card p-5 rounded-xl flex flex-col justify-between border-brand/30 reveal">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center mb-5">
-              <i data-lucide="clock" class="w-6 h-6"></i>
+            <div class="w-10 h-10 rounded-lg bg-brand/10 text-brand flex items-center justify-center mb-4">
+              <i data-lucide="clock" class="w-5 h-5"></i>
             </div>
-            <h3 class="font-display font-bold text-lg text-white">Horarios de Atención</h3>
-            <p class="text-xs text-zinc-400 mt-1">Lunes a Sábado</p>
+            <h3 class="font-display font-bold text-base text-white">Horarios de Atención</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">Lunes a Sábado</p>
             
-            <div class="mt-4 space-y-2 bg-carbon-950 p-3 rounded-xl border border-white/5">
+            <div class="mt-3 space-y-1.5 bg-carbon-950 p-2.5 rounded-lg border border-white/5">
               <div class="flex items-center justify-between text-xs">
                 <span class="text-zinc-400 font-medium">Mañana:</span>
                 <span class="text-white font-bold">08:00 a 13:00 hs</span>
@@ -631,14 +623,14 @@
 
         <!-- WhatsApp -->
         <a href="https://wa.me/5493804374962" target="_blank" rel="noopener noreferrer"
-           class="spotlight-card p-6 sm:p-7 rounded-2xl transition-all group flex flex-col justify-between reveal">
+           class="spotlight-card p-5 rounded-xl transition-all group flex flex-col justify-between reveal">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <i data-lucide="phone-call" class="w-6 h-6"></i>
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <i data-lucide="phone-call" class="w-5 h-5"></i>
             </div>
-            <h3 class="font-display font-bold text-lg text-white">WhatsApp Oficial</h3>
-            <p class="text-xs text-zinc-400 mt-1">Consultas y presupuestos directos</p>
-            <p class="text-emerald-400 font-semibold text-base mt-4">+54 9 3804 37-4962</p>
+            <h3 class="font-display font-bold text-base text-white">WhatsApp Oficial</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">Consultas y presupuestos directos</p>
+            <p class="text-emerald-400 font-semibold text-sm sm:text-base mt-3">+54 9 3804 37-4962</p>
           </div>
           <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 group-hover:text-white mt-4 transition-colors">
             <span>Iniciar chat</span>
@@ -648,18 +640,18 @@
 
         <!-- Instagram -->
         <a href="https://www.instagram.com/tallerangelleli/" target="_blank" rel="noopener noreferrer"
-           class="spotlight-card p-6 sm:p-7 rounded-2xl transition-all group flex flex-col justify-between reveal">
+           class="spotlight-card p-5 rounded-xl transition-all group flex flex-col justify-between reveal">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-yellow-500 via-rose-500 to-purple-600 text-white flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-md shadow-rose-500/20">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-yellow-500 via-rose-500 to-purple-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md shadow-rose-500/20">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
               </svg>
             </div>
-            <h3 class="font-display font-bold text-lg text-white">Instagram Oficial</h3>
-            <p class="text-xs text-zinc-400 mt-1">Seguinos y mira nuestros trabajos</p>
-            <p class="text-rose-400 font-semibold text-base mt-4">@tallerangelleli</p>
+            <h3 class="font-display font-bold text-base text-white">Instagram Oficial</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">Seguinos y mira nuestros trabajos</p>
+            <p class="text-rose-400 font-semibold text-sm sm:text-base mt-3">@tallerangelleli</p>
           </div>
           <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 group-hover:text-white mt-4 transition-colors">
             <span>Ver perfil en Instagram</span>
@@ -668,16 +660,16 @@
         </a>
 
         <!-- Google Maps -->
-        <a href="https://www.google.com/maps/place/Taller+Angelelli/@-29.4200784,-66.8433088,498a,75y,18.3h,81.11t/data=!3m7!1e1!3m5!1s63N5DRYAoXt-54fnW-UB4Q!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D8.886424892586774%26panoid%3D63N5DRYAoXt-54fnW-UB4Q%26yaw%3D18.29844369155247!7i16384!8i8192!4m6!3m5!1s0x9427db005d014591:0xf3d1ffbb3212ace2!8m2!3d-29.4199983!4d-66.8432538!16s%2Fg%2F11x_c5pwfp?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D" 
+        <a href="https://www.google.com/maps/place/Taller+Angelelli/@-29.4200784,-66.8433088,498a,75y,18.3h,81.11t/data=!3m7!1e1!3m5!1s63N5DRYAoXt-54fnW-UB4Q!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D8.886424892586774%26panoid%3D63N5DRYAoXt-54fnW-UB4Q%26yaw%3D18.29844369155247!7i16384!8i8192!4m6!3m5!1s0x9427db005d014591:0xf3d1ffbb3212ace2!8m2!3d-29.4199983!4d-66.8432538!16s%2Fg%2F11x_c5pwfp?entry=ttu" 
            target="_blank" rel="noopener noreferrer"
-           class="spotlight-card p-6 sm:p-7 rounded-2xl transition-all group flex flex-col justify-between reveal">
+           class="spotlight-card p-5 rounded-xl transition-all group flex flex-col justify-between reveal">
           <div>
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-              <i data-lucide="map-pin" class="w-6 h-6"></i>
+            <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <i data-lucide="map-pin" class="w-5 h-5"></i>
             </div>
-            <h3 class="font-display font-bold text-lg text-white">¿Cómo llegar?</h3>
-            <p class="text-xs text-zinc-400 mt-1">Ubicación verificada</p>
-            <p class="text-blue-400 font-semibold text-base mt-4">Taller Angelelli, La Rioja</p>
+            <h3 class="font-display font-bold text-base text-white">¿Cómo llegar?</h3>
+            <p class="text-xs text-zinc-400 mt-0.5">Ubicación verificada</p>
+            <p class="text-blue-400 font-semibold text-sm sm:text-base mt-3">Taller Angelelli, La Rioja</p>
           </div>
           <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 group-hover:text-white mt-4 transition-colors">
             <span>Abrir en Google Maps</span>
@@ -686,84 +678,75 @@
         </a>
 
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- FOOTER CON CRÉDITOS G.A. CENTER Y BOTÓN ADMIN                -->
-  <!-- ============================================================ -->
-  <footer class="mt-auto bg-carbon-950 border-t border-white/10 py-10 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-      
+  <!-- FOOTER -->
+  <footer class="mt-auto bg-carbon-950 border-t border-white/10 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3 text-center sm:text-left">
-        <img src="logo.jpg" alt="Logo" class="w-9 h-9 rounded-full object-cover border border-brand/50">
+        <img src="logo.jpg" alt="Logo" class="w-8 h-8 rounded-full object-cover border border-brand/50">
         <div>
-          <p class="font-display font-bold text-white text-base tracking-wide">
+          <p class="font-display font-bold text-white text-sm tracking-wide">
             TALLER ANGELELLI
           </p>
-          <p class="text-xs text-zinc-400 mt-0.5">
+          <p class="text-[11px] text-zinc-400 mt-0.5">
             Mecánica general y servicios automotores con garantía • La Rioja
           </p>
         </div>
       </div>
 
-      <!-- Marca de creador: G.A. CENTER -->
-      <div class="text-center py-1.5 px-4 rounded-full bg-carbon-900 border border-white/10 shadow-sm">
-        <span class="text-xs text-zinc-400">Creado por </span>
-        <span class="text-xs font-extrabold tracking-wider text-brand">G.A. CENTER</span>
+      <div class="text-center py-1.5 px-3 rounded-full bg-carbon-900 border border-white/10 shadow-sm">
+        <span class="text-[11px] text-zinc-400">Creado por </span>
+        <span class="text-[11px] font-extrabold tracking-wider text-brand">G.A. CENTER</span>
       </div>
 
       <div>
         <button id="btn-abrir-admin" 
-                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-500 hover:text-zinc-300 hover:bg-carbon-900 transition-colors border border-transparent hover:border-zinc-800">
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-500 hover:text-zinc-300 hover:bg-carbon-900 transition-colors border border-transparent hover:border-zinc-800">
           <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
           <span>Admin</span>
         </button>
       </div>
-
     </div>
   </footer>
 
-  <!-- ============================================================ -->
-  <!-- BOTÓN FLOTANTE WHATSAPP CON PULSO                            -->
-  <!-- ============================================================ -->
+  <!-- BOTÓN FLOTANTE WHATSAPP -->
   <a href="https://wa.me/5493804374962?text=Hola%20Taller%20Angelelli,%20quiero%20hacer%20una%20consulta" 
      target="_blank" rel="noopener noreferrer"
-     class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center shadow-2xl shadow-emerald-500/40 hover:scale-110 transition-all duration-300"
+     class="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center shadow-2xl shadow-emerald-500/40 hover:scale-110 transition-all duration-300"
      aria-label="Contactar por WhatsApp">
-    <i data-lucide="message-circle" class="w-7 h-7"></i>
+    <i data-lucide="message-circle" class="w-6 h-6"></i>
   </a>
 
-  <!-- ============================================================ -->
-  <!-- MODAL: FICHA TÉCNICA DETALLADA DEL VEHÍCULO (LIGHTBOX)       -->
-  <!-- ============================================================ -->
+  <!-- MODAL: FICHA TÉCNICA DETALLADA (LIGHTBOX) -->
   <div id="modal-detalle-auto" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-carbon-900 border border-white/15 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col">
-      <div class="relative h-72 sm:h-80 w-full overflow-hidden bg-carbon-950">
+    <div class="bg-carbon-900 border border-white/15 rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl flex flex-col">
+      <div class="relative h-60 sm:h-72 w-full overflow-hidden bg-carbon-950">
         <img id="modal-detalle-img" src="" alt="Vehículo" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-carbon-900 via-transparent to-transparent"></div>
-        <button id="btn-cerrar-detalle" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/70 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button id="btn-cerrar-detalle" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
-      <div class="p-6 sm:p-8 space-y-4">
+
+      <div class="p-5 sm:p-6 space-y-3">
         <div class="flex items-center justify-between">
-          <span class="px-3 py-1 rounded-full bg-brand/15 border border-brand/30 text-brand text-xs font-bold uppercase tracking-wider">
+          <span class="px-2.5 py-0.5 rounded-full bg-brand/15 border border-brand/30 text-brand text-[11px] font-bold uppercase tracking-wider">
             Trabajo Entregado
           </span>
-          <span id="modal-detalle-fecha" class="text-xs text-zinc-400 font-mono"></span>
+          <span id="modal-detalle-fecha" class="text-[11px] text-zinc-400 font-mono"></span>
         </div>
-        <h3 id="modal-detalle-titulo" class="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight"></h3>
-        <p id="modal-detalle-desc" class="text-zinc-300 text-sm sm:text-base leading-relaxed"></p>
+        <h3 id="modal-detalle-titulo" class="font-display font-black text-xl sm:text-2xl text-white uppercase tracking-tight"></h3>
+        <p id="modal-detalle-desc" class="text-zinc-300 text-xs sm:text-sm leading-relaxed"></p>
 
-        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
             <i data-lucide="badge-check" class="w-4 h-4"></i>
-            <span>Garantía de Reparación Taller Angelelli</span>
+            <span>Garantía Taller Angelelli</span>
           </div>
           <a id="modal-detalle-btn-wa" href="#" target="_blank"
-             class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
+             class="w-full sm:w-auto px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
             <i data-lucide="message-circle" class="w-4 h-4"></i>
             <span>Consultar por este trabajo</span>
           </a>
@@ -772,41 +755,38 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- MODAL: PANEL DE ADMINISTRACIÓN (CREAR, EDITAR, ELIMINAR)      -->
-  <!-- ============================================================ -->
+  <!-- MODAL: PANEL DE ADMINISTRACIÓN -->
   <div id="modal-admin" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-carbon-900 border border-white/15 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+    <div class="bg-carbon-900 border border-white/15 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
       
-      <!-- Header Admin -->
-      <div class="p-6 border-b border-white/10 flex items-center justify-between bg-carbon-850">
+      <div class="p-5 border-b border-white/10 flex items-center justify-between bg-carbon-850">
         <div class="flex items-center gap-3">
-          <img src="logo.jpg" alt="Logo" class="w-8 h-8 rounded-full border border-brand">
+          <img src="logo.jpg" alt="Logo" class="w-7 h-7 rounded-full border border-brand">
           <div>
-            <h3 class="font-display font-bold text-lg text-white">Panel de Administración</h3>
-            <p class="text-xs text-zinc-400">Control de Trabajos y Publicaciones</p>
+            <h3 class="font-display font-bold text-base text-white">Panel de Administración</h3>
+            <p class="text-[11px] text-zinc-400">Control de Trabajos y Publicaciones</p>
           </div>
         </div>
-        <button id="btn-cerrar-admin" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-carbon-800 transition">
+        <button id="btn-cerrar-admin" class="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-carbon-800 transition">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- Vista 1: Login -->
       <div id="vista-login-admin" class="p-8 text-center">
-        <div class="w-14 h-14 rounded-2xl bg-carbon-800 border border-white/10 text-brand flex items-center justify-center mx-auto mb-4">
-          <i data-lucide="lock" class="w-7 h-7"></i>
+        <div class="w-12 h-12 rounded-xl bg-carbon-800 border border-white/10 text-brand flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="lock" class="w-6 h-6"></i>
         </div>
-        <h4 class="font-display font-bold text-xl text-white">Acceso Restringido</h4>
+        <h4 class="font-display font-bold text-lg text-white">Acceso Restringido</h4>
         <p class="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">Ingresa tu contraseña de administrador para publicar, editar o eliminar autos.</p>
 
-        <form id="form-login-admin" class="mt-6 max-w-xs mx-auto space-y-4">
+        <form id="form-login-admin" class="mt-5 max-w-xs mx-auto space-y-3">
           <div>
             <input type="password" id="input-password-admin" placeholder="Contraseña..." required
-                   class="w-full px-4 py-3 rounded-xl bg-carbon-950 border border-zinc-700 text-white text-center tracking-widest text-base focus:border-brand focus:outline-none">
+                   class="w-full px-3.5 py-2.5 rounded-xl bg-carbon-950 border border-zinc-700 text-white text-center tracking-widest text-sm focus:border-brand focus:outline-none">
           </div>
           <button type="submit"
-                  class="w-full py-3 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-sm tracking-wide uppercase transition shadow-lg shadow-brand/20">
+                  class="w-full py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs tracking-wide uppercase transition shadow-lg shadow-brand/20">
             Ingresar al Panel
           </button>
           <p id="error-password-admin" class="text-xs text-red-400 hidden">Contraseña incorrecta. Inténtalo de nuevo.</p>
@@ -814,81 +794,75 @@
       </div>
 
       <!-- Vista 2: Gestión -->
-      <div id="vista-gestion-admin" class="p-6 overflow-y-auto space-y-8 hidden">
-        
-        <!-- Formulario -->
-        <div class="p-5 rounded-2xl bg-carbon-850 border border-white/5 space-y-4">
+      <div id="vista-gestion-admin" class="p-5 overflow-y-auto space-y-6 hidden">
+        <div class="p-4 rounded-xl bg-carbon-850 border border-white/5 space-y-3">
           <div class="flex items-center justify-between">
-            <h4 id="titulo-form-admin" class="font-display font-bold text-base text-white flex items-center gap-2">
+            <h4 id="titulo-form-admin" class="font-display font-bold text-sm text-white flex items-center gap-2">
               <i data-lucide="plus-circle" class="w-4 h-4 text-brand"></i>
               <span>Publicar Nuevo Trabajo</span>
             </h4>
-            <button type="button" id="btn-cancelar-edicion" class="hidden text-xs text-zinc-400 hover:text-white px-3 py-1 rounded bg-carbon-950 border border-white/10">
+            <button type="button" id="btn-cancelar-edicion" class="hidden text-[11px] text-zinc-400 hover:text-white px-2.5 py-1 rounded bg-carbon-950 border border-white/10">
               Cancelar Edición
             </button>
           </div>
 
-          <form id="form-nuevo-trabajo" class="space-y-4">
+          <form id="form-nuevo-trabajo" class="space-y-3">
             <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase mb-1">Vehículo (Marca y Modelo)</label>
+              <label class="block text-[11px] font-semibold text-zinc-300 uppercase mb-1">Vehículo (Marca y Modelo)</label>
               <input type="text" id="admin-vehiculo" required placeholder="Ej: Volkswagen Amarok 2.0 TDI"
-                     class="w-full px-3.5 py-2.5 rounded-lg bg-carbon-950 border border-zinc-800 text-white text-sm focus:border-brand focus:outline-none">
+                     class="w-full px-3 py-2 rounded-lg bg-carbon-950 border border-zinc-800 text-white text-xs focus:border-brand focus:outline-none">
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase mb-1">Descripción del Arreglo Realizado</label>
-              <textarea id="admin-descripcion" required rows="2" placeholder="Ej: Cambio de kit de distribución, cambio de bomba de agua y service completo..."
-                        class="w-full px-3.5 py-2.5 rounded-lg bg-carbon-950 border border-zinc-800 text-white text-sm focus:border-brand focus:outline-none resize-none"></textarea>
+              <label class="block text-[11px] font-semibold text-zinc-300 uppercase mb-1">Descripción del Arreglo Realizado</label>
+              <textarea id="admin-descripcion" required rows="2" placeholder="Ej: Cambio de kit de distribución y service completo..."
+                        class="w-full px-3 py-2 rounded-lg bg-carbon-950 border border-zinc-800 text-white text-xs focus:border-brand focus:outline-none resize-none"></textarea>
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase mb-1">Foto del Auto Terminado</label>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <label class="border-2 border-dashed border-zinc-700 hover:border-brand rounded-xl p-3 text-center cursor-pointer flex flex-col items-center justify-center bg-carbon-950 transition">
-                  <i data-lucide="upload" class="w-5 h-5 text-zinc-400 mb-1"></i>
-                  <span class="text-xs font-medium text-zinc-300">Elegir foto del celular o PC</span>
+              <label class="block text-[11px] font-semibold text-zinc-300 uppercase mb-1">Foto del Auto Terminado</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <label class="border-2 border-dashed border-zinc-700 hover:border-brand rounded-xl p-2.5 text-center cursor-pointer flex flex-col items-center justify-center bg-carbon-950 transition">
+                  <i data-lucide="upload" class="w-4 h-4 text-zinc-400 mb-1"></i>
+                  <span class="text-[11px] font-medium text-zinc-300">Elegir foto (Celular/PC)</span>
                   <input type="file" id="admin-foto-file" accept="image/*" class="hidden">
                 </label>
                 <div>
                   <input type="url" id="admin-foto-url" placeholder="O pegar enlace web (https://...)"
-                         class="w-full h-full px-3.5 py-2.5 rounded-xl bg-carbon-950 border border-zinc-800 text-white text-xs focus:border-brand focus:outline-none">
+                         class="w-full h-full px-3 py-2 rounded-xl bg-carbon-950 border border-zinc-800 text-white text-[11px] focus:border-brand focus:outline-none">
                 </div>
               </div>
 
-              <div id="contenedor-preview" class="hidden mt-3 p-2 bg-carbon-950 rounded-xl border border-white/5 flex items-center gap-3">
-                <img id="img-preview" src="" alt="Vista previa" class="w-16 h-12 object-cover rounded-lg border border-white/10">
-                <span class="text-xs text-zinc-400 truncate flex-1">Imagen cargada</span>
+              <div id="contenedor-preview" class="hidden mt-2 p-2 bg-carbon-950 rounded-lg border border-white/5 flex items-center gap-3">
+                <img id="img-preview" src="" alt="Vista previa" class="w-12 h-9 object-cover rounded border border-white/10">
+                <span class="text-[11px] text-zinc-400 truncate flex-1">Imagen cargada</span>
                 <button type="button" id="btn-quitar-foto" class="text-red-400 hover:text-red-300 text-xs px-2 py-1">Quitar</button>
               </div>
             </div>
 
             <button type="submit" id="btn-guardar-trabajo"
-                    class="w-full py-3 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg shadow-brand/20">
+                    class="w-full py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg shadow-brand/20">
               <i data-lucide="check" class="w-4 h-4"></i>
               <span>Publicar Auto en la Web</span>
             </button>
           </form>
         </div>
 
-        <!-- Lista de Trabajos -->
         <div>
-          <h4 class="font-display font-bold text-base text-white mb-3 flex items-center gap-2">
+          <h4 class="font-display font-bold text-sm text-white mb-2.5 flex items-center gap-2">
             <i data-lucide="list" class="w-4 h-4 text-brand"></i>
-            <span>Trabajos Publicados Actualmente</span>
+            <span>Trabajos Publicados</span>
           </h4>
-          <div id="lista-admin-trabajos" class="space-y-3">
+          <div id="lista-admin-trabajos" class="space-y-2.5">
             <p class="text-xs text-zinc-500">Cargando lista...</p>
           </div>
         </div>
-
       </div>
 
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- SCRIPT PRINCIPAL: SUPABASE, LÓGICA Y ANIMACIONES             -->
-  <!-- ============================================================ -->
+  <!-- SCRIPT PRINCIPAL -->
   <script>
     const SUPABASE_URL = "https://eurqojdpcggjsjrxddfg.supabase.co";
     const SUPABASE_KEY = "sb_publishable_gDde6ZNt8lbwARuwPz8Uiw_SNoPzjRi";
@@ -904,9 +878,6 @@
     let filtroActivo = "todos";
     let busquedaActiva = "";
 
-    // ==========================================
-    // SISTEMA DE NOTIFICACIONES TOAST ELEGANTE
-    // ==========================================
     function mostrarToast(mensaje, tipo = "exito") {
       const container = document.getElementById("toast-container");
       const toast = document.createElement("div");
@@ -914,11 +885,8 @@
       const bgColor = tipo === "exito" ? "bg-emerald-600/90 border-emerald-500/40" : "bg-red-600/90 border-red-500/40";
       const icon = tipo === "exito" ? "check-circle" : "alert-triangle";
 
-      toast.className = `flex items-center gap-3 px-4 py-3 rounded-xl ${bgColor} border backdrop-blur-md text-white text-xs font-semibold shadow-2xl transition-all duration-300 pointer-events-auto transform translate-y-2 opacity-0`;
-      toast.innerHTML = `
-        <i data-lucide="${icon}" class="w-4 h-4"></i>
-        <span>${mensaje}</span>
-      `;
+      toast.className = `flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl ${bgColor} border backdrop-blur-md text-white text-xs font-semibold shadow-2xl transition-all duration-300 pointer-events-auto transform translate-y-2 opacity-0`;
+      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4"></i><span>${mensaje}</span>`;
       
       container.appendChild(toast);
       lucide.createIcons();
@@ -933,14 +901,10 @@
       }, 4000);
     }
 
-    // ==========================================
-    // ESTADO EN VIVO: ¿TALLER ABIERTO O CERRADO?
-    // ==========================================
     function actualizarEstadoTaller() {
       const ahora = new Date();
-      // Ajustar a hora de Argentina (UTC-3)
       const horaArgentina = new Date(ahora.toLocaleString("en-US", { timeZone: "America/Argentina/La_Rioja" }));
-      const dia = horaArgentina.getDay(); // 0 es Domingo
+      const dia = horaArgentina.getDay();
       const hora = horaArgentina.getHours();
       const minutos = horaArgentina.getMinutes();
       const tiempoActual = hora + minutos / 60;
@@ -949,35 +913,35 @@
       const texto = document.getElementById("texto-estado");
       const navBadge = document.getElementById("estado-taller-nav");
 
-      // Horarios: Lunes(1) a Sábado(6)
-      // Mañana: 08:00 a 13:00 (8.0 a 13.0)
-      // Tarde: 17:00 a 21:00 (17.0 a 21.0)
       const esDiaLaboral = dia >= 1 && dia <= 6;
       const abiertoManana = tiempoActual >= 8.0 && tiempoActual < 13.0;
       const abiertoTarde = tiempoActual >= 17.0 && tiempoActual < 21.0;
 
       if (esDiaLaboral && (abiertoManana || abiertoTarde)) {
-        dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-        texto.innerText = "Abierto Ahora";
-        navBadge.classList.remove("border-red-500/30");
-        navBadge.classList.add("border-emerald-500/30");
-      } else {
-        dot.className = "w-2 h-2 rounded-full bg-red-500";
-        if (esDiaLaboral && tiempoActual < 8.0) {
-          texto.innerText = "Abre hoy 08:00 hs";
-        } else if (esDiaLaboral && tiempoActual >= 13.0 && tiempoActual < 17.0) {
-          texto.innerText = "Abre hoy 17:00 hs";
-        } else {
-          texto.innerText = "Cerrado por hoy";
+        if(dot) dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+        if(texto) texto.innerText = "Abierto Ahora";
+        if(navBadge) {
+          navBadge.classList.remove("border-red-500/30");
+          navBadge.classList.add("border-emerald-500/30");
         }
-        navBadge.classList.remove("border-emerald-500/30");
-        navBadge.classList.add("border-red-500/30");
+      } else {
+        if(dot) dot.className = "w-2 h-2 rounded-full bg-red-500";
+        if(texto) {
+          if (esDiaLaboral && tiempoActual < 8.0) {
+            texto.innerText = "Abre hoy 08:00 hs";
+          } else if (esDiaLaboral && tiempoActual >= 13.0 && tiempoActual < 17.0) {
+            texto.innerText = "Abre hoy 17:00 hs";
+          } else {
+            texto.innerText = "Cerrado por hoy";
+          }
+        }
+        if(navBadge) {
+          navBadge.classList.remove("border-emerald-500/30");
+          navBadge.classList.add("border-red-500/30");
+        }
       }
     }
 
-    // ==========================================
-    // CARGAR Y FILTRAR TRABAJOS DESDE SUPABASE
-    // ==========================================
     async function cargarTrabajos() {
       const contador = document.getElementById("contador-trabajos");
 
@@ -995,8 +959,8 @@
 
       } catch (err) {
         console.error("Error al cargar trabajos:", err);
-        contador.innerText = "Modo demostración";
-        mostrarTrabajosDeEjemplo();
+        if(contador) contador.innerText = "Modo demostración";
+        renderizarGridFiltrado();
       }
     }
 
@@ -1005,7 +969,6 @@
       const estadoVacio = document.getElementById("estado-vacio");
       const contador = document.getElementById("contador-trabajos");
 
-      // Aplicar filtros de texto y categoría
       const filtrados = trabajosCargadosEnMemoria.filter(item => {
         const matchTexto = 
           item.vehiculo.toLowerCase().includes(busquedaActiva) ||
@@ -1020,55 +983,55 @@
         return matchTexto && matchFiltro;
       });
 
+      if(!grid) return;
       grid.innerHTML = "";
 
       if (filtrados.length === 0) {
-        estadoVacio.classList.remove("hidden");
-        contador.innerText = `0 de ${trabajosCargadosEnMemoria.length} trabajos`;
+        if(estadoVacio) estadoVacio.classList.remove("hidden");
+        if(contador) contador.innerText = `0 de ${trabajosCargadosEnMemoria.length} trabajos`;
         return;
       }
 
-      estadoVacio.classList.add("hidden");
-      contador.innerText = `Mostrando ${filtrados.length} de ${trabajosCargadosEnMemoria.length} ${trabajosCargadosEnMemoria.length === 1 ? 'trabajo' : 'trabajos'}`;
+      if(estadoVacio) estadoVacio.classList.add("hidden");
+      if(contador) contador.innerText = `Mostrando ${filtrados.length} de ${trabajosCargadosEnMemoria.length}`;
 
       filtrados.forEach(item => {
         const card = document.createElement("div");
-        card.className = "spotlight-card rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 group flex flex-col justify-between cursor-pointer reveal active";
+        card.className = "spotlight-card rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between cursor-pointer reveal active";
         
         card.onclick = () => abrirDetalleModal(item);
 
         card.innerHTML = `
           <div>
-            <div class="relative h-56 sm:h-64 w-full overflow-hidden bg-carbon-950">
+            <div class="relative h-40 sm:h-56 w-full overflow-hidden bg-carbon-950">
               <img src="${item.imagen_url}" alt="${item.vehiculo}" 
                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                    loading="lazy"
                    onerror="this.src='logo.jpg'">
               <div class="absolute inset-0 bg-gradient-to-t from-carbon-950 via-transparent to-transparent opacity-85"></div>
               
-              <!-- Badge superior -->
-              <div class="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-carbon-950/80 backdrop-blur-md border border-brand/40 text-[11px] font-bold uppercase text-brand tracking-wider">
+              <div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-carbon-950/80 backdrop-blur-md border border-brand/40 text-[10px] font-bold uppercase text-brand tracking-wider">
                 Ver Ficha
               </div>
             </div>
 
-            <div class="p-6">
-              <h3 class="font-display font-black text-xl text-white uppercase tracking-tight group-hover:text-brand transition-colors line-clamp-1">
+            <div class="p-3 sm:p-4">
+              <h3 class="font-display font-black text-sm sm:text-lg text-white uppercase tracking-tight group-hover:text-brand transition-colors line-clamp-1">
                 ${escapeHtml(item.vehiculo)}
               </h3>
-              <p class="mt-2 text-zinc-300 text-sm leading-relaxed line-clamp-2">
+              <p class="mt-1 text-zinc-300 text-xs leading-relaxed line-clamp-2">
                 ${escapeHtml(item.descripcion)}
               </p>
             </div>
           </div>
 
-          <div class="px-6 pb-6 pt-2 border-t border-white/5 flex items-center justify-between text-xs text-zinc-400">
-            <span class="inline-flex items-center gap-1.5 text-emerald-400 font-medium">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Trabajo Garantizado
+          <div class="px-3 pb-3 sm:px-4 sm:pb-4 pt-1 border-t border-white/5 flex items-center justify-between text-[11px] text-zinc-400">
+            <span class="inline-flex items-center gap-1 text-emerald-400 font-medium">
+              <i data-lucide="shield-check" class="w-3 h-3"></i> Garantizado
             </span>
-            <span class="text-zinc-400 group-hover:text-white transition flex items-center gap-1">
+            <span class="text-zinc-400 group-hover:text-white transition flex items-center gap-0.5">
               <span>Detalles</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              <i data-lucide="arrow-right" class="w-3 h-3"></i>
             </span>
           </div>
         `;
@@ -1079,7 +1042,6 @@
       lucide.createIcons();
     }
 
-    // Modal de Ficha Técnica / Lightbox
     function abrirDetalleModal(item) {
       document.getElementById("modal-detalle-img").src = item.imagen_url;
       document.getElementById("modal-detalle-titulo").innerText = item.vehiculo;
@@ -1103,27 +1065,32 @@
       modal.classList.remove("flex");
     });
 
-    // Buscador interactivo
-    document.getElementById("input-buscar-trabajo").addEventListener("input", (e) => {
+    // Filtros de búsqueda (tanto en sección como en el buscador superior sticky)
+    const handleBusquedaInput = (e) => {
       busquedaActiva = e.target.value.toLowerCase().trim();
-      renderizarGridFiltrado();
-    });
+      // Sincronizar ambos inputs de búsqueda si existen
+      const inputSeccion = document.getElementById("input-buscar-trabajo");
+      const inputHeader = document.getElementById("buscador-header-rapido");
+      if(inputSeccion && inputSeccion !== e.target) inputSeccion.value = e.target.value;
+      if(inputHeader && inputHeader !== e.target) inputHeader.value = e.target.value;
 
-    // Chips de filtrado
+      renderizarGridFiltrado();
+    };
+
+    document.getElementById("input-buscar-trabajo")?.addEventListener("input", handleBusquedaInput);
+    document.getElementById("buscador-header-rapido")?.addEventListener("input", handleBusquedaInput);
+
     document.querySelectorAll(".filtro-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".filtro-btn").forEach(b => {
-          b.className = "filtro-btn px-3 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0";
+          b.className = "filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0";
         });
-        btn.className = "filtro-btn px-3 py-1.5 rounded-lg bg-brand text-white font-semibold transition shrink-0";
+        btn.className = "filtro-btn px-2.5 py-1.5 rounded-lg bg-brand text-white font-semibold transition shrink-0";
         filtroActivo = btn.dataset.filtro;
         renderizarGridFiltrado();
       });
     });
 
-    // ==========================================
-    // CHIPS RÁPIDOS DE SERVICIO EN EL FORMULARIO
-    // ==========================================
     document.querySelectorAll(".chip-servicio").forEach(chip => {
       chip.addEventListener("click", () => {
         const textoServicio = chip.innerText.replace(/^[^\w]+/, '').trim();
@@ -1137,12 +1104,8 @@
       });
     });
 
-    // ==========================================
-    // ENVÍO DE TURNOS POR WHATSAPP
-    // ==========================================
     document.getElementById("form-turno").addEventListener("submit", function(e) {
       e.preventDefault();
-      
       const nombre = document.getElementById("cliente-nombre").value.trim();
       const vehiculo = document.getElementById("cliente-vehiculo").value.trim();
       const motivo = document.getElementById("cliente-motivo").value.trim();
@@ -1155,20 +1118,15 @@
         `Quedo a la espera de su respuesta para coordinar día y horario. ¡Muchas gracias!`;
 
       mostrarToast("Abriendo WhatsApp con tu turno...", "exito");
-      const whatsappURL = `https://wa.me/5493804374962?text=${encodeURIComponent(mensaje)}`;
-      window.open(whatsappURL, "_blank");
+      window.open(`https://wa.me/5493804374962?text=${encodeURIComponent(mensaje)}`, "_blank");
     });
 
-    // ==========================================
-    // ACCORDION PREGUNTAS FRECUENTES (FAQ)
-    // ==========================================
     document.querySelectorAll(".faq-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const content = btn.nextElementSibling;
         const icon = btn.querySelector(".faq-icon");
         const isOpen = !content.classList.contains("hidden");
 
-        // Cerrar todos los demás
         document.querySelectorAll(".faq-content").forEach(c => c.classList.add("hidden"));
         document.querySelectorAll(".faq-icon").forEach(i => i.classList.remove("rotate-180"));
 
@@ -1179,9 +1137,6 @@
       });
     });
 
-    // ==========================================
-    // EFECTO SPOTLIGHT (Linterna con el cursor)
-    // ==========================================
     function inicializarSpotlight() {
       document.querySelectorAll(".spotlight-card").forEach(card => {
         card.onmousemove = e => {
@@ -1194,9 +1149,6 @@
       });
     }
 
-    // ==========================================
-    // PANEL ADMIN (LOGIN, CREACIÓN, EDICIÓN, DELETE)
-    // ==========================================
     const modalAdmin = document.getElementById("modal-admin");
     const vistaLogin = document.getElementById("vista-login-admin");
     const vistaGestion = document.getElementById("vista-gestion-admin");
@@ -1325,6 +1277,7 @@
 
     function renderizarListaAdmin(trabajos) {
       const contenedor = document.getElementById("lista-admin-trabajos");
+      if(!contenedor) return;
       contenedor.innerHTML = "";
 
       if (!trabajos || trabajos.length === 0) {
@@ -1334,26 +1287,18 @@
 
       trabajos.forEach(t => {
         const row = document.createElement("div");
-        row.className = "flex items-center justify-between p-3 rounded-xl bg-carbon-950 border border-white/5 gap-3";
+        row.className = "flex items-center justify-between p-2.5 rounded-xl bg-carbon-950 border border-white/5 gap-2.5";
         row.innerHTML = `
-          <div class="flex items-center gap-3 overflow-hidden">
-            <img src="${t.imagen_url}" class="w-12 h-10 object-cover rounded-md border border-white/10 shrink-0" onerror="this.src='logo.jpg'">
+          <div class="flex items-center gap-2.5 overflow-hidden">
+            <img src="${t.imagen_url}" class="w-10 h-8 object-cover rounded border border-white/10 shrink-0" onerror="this.src='logo.jpg'">
             <div class="truncate">
               <h5 class="text-xs font-bold text-white truncate">${escapeHtml(t.vehiculo)}</h5>
-              <p class="text-[11px] text-zinc-400 truncate">${escapeHtml(t.descripcion)}</p>
+              <p class="text-[10px] text-zinc-400 truncate">${escapeHtml(t.descripcion)}</p>
             </div>
           </div>
-          <div class="flex items-center gap-2 shrink-0">
-            <button onclick="iniciarEdicion(${t.id})" 
-                    class="px-2.5 py-1.5 rounded-lg bg-blue-500/15 hover:bg-blue-500/25 text-blue-400 hover:text-blue-300 text-xs font-semibold transition flex items-center gap-1">
-              <i data-lucide="edit-3" class="w-3 h-3"></i>
-              <span>Editar</span>
-            </button>
-            <button onclick="eliminarTrabajo(${t.id})" 
-                    class="px-2.5 py-1.5 rounded-lg bg-red-500/15 hover:bg-red-500/25 text-red-400 hover:text-red-300 text-xs font-semibold transition flex items-center gap-1">
-              <i data-lucide="trash-2" class="w-3 h-3"></i>
-              <span>Eliminar</span>
-            </button>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button onclick="iniciarEdicion(${t.id})" class="px-2 py-1 rounded bg-blue-500/15 text-blue-400 text-[11px] font-semibold">Editar</button>
+            <button onclick="eliminarTrabajo(${t.id})" class="px-2 py-1 rounded bg-red-500/15 text-red-400 text-[11px] font-semibold">Eliminar</button>
           </div>
         `;
         contenedor.appendChild(row);
@@ -1404,7 +1349,6 @@
       );
     }
 
-    // Scroll reveal observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1416,7 +1360,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       lucide.createIcons();
       actualizarEstadoTaller();
-      setInterval(actualizarEstadoTaller, 60000); // Actualizar cada minuto
+      setInterval(actualizarEstadoTaller, 60000);
       inicializarSpotlight();
       cargarTrabajos();
 
