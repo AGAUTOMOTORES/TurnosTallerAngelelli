@@ -331,7 +331,7 @@
     </div>
   </section>
 
-  <!-- SECCIÓN: TRABAJOS REALIZADOS (2 Columnas Celular / 3 Desktop) -->
+  <!-- SECCIÓN: TRABAJOS REALIZADOS (3x3 por página) -->
   <section id="trabajos" class="py-16 relative">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       
@@ -354,30 +354,12 @@
         </div>
       </div>
 
-      <!-- Buscador y Filtros -->
-      <div class="mb-8 p-3.5 sm:p-4 rounded-2xl bg-carbon-900/80 border border-white/10 flex flex-col sm:flex-row items-center gap-3 reveal">
-        <div class="relative w-full sm:w-80">
+      <!-- Solo Buscador -->
+      <div class="mb-8 p-3.5 sm:p-4 rounded-2xl bg-carbon-900/80 border border-white/10 flex items-center reveal">
+        <div class="relative w-full">
           <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400"></i>
           <input type="text" id="input-buscar-trabajo" placeholder="Buscar por auto o arreglo (ej. Hilux, frenos...)"
-                 class="w-full pl-10 pr-4 py-2 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 text-xs focus:outline-none focus:border-brand transition">
-        </div>
-
-        <div class="flex items-center gap-1.5 overflow-x-auto w-full pb-1 sm:pb-0 text-xs scrollbar-none">
-          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-brand text-white font-semibold transition shrink-0" data-filtro="todos">
-            Todos
-          </button>
-          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="distribución">
-            Distribución
-          </button>
-          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="frenos">
-            Frenos
-          </button>
-          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="service">
-            Service
-          </button>
-          <button class="filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0" data-filtro="tren delantero">
-            Tren Delantero
-          </button>
+                 class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-carbon-950 border border-zinc-800 text-white placeholder-zinc-500 text-xs sm:text-sm focus:outline-none focus:border-brand transition">
         </div>
       </div>
 
@@ -386,13 +368,16 @@
         <!-- Inyectado dinámicamente por JS -->
       </div>
 
+      <!-- Controles de Paginación (3x3 = 9 por página) -->
+      <div id="paginacion-trabajos" class="mt-10 flex flex-wrap items-center justify-center gap-2"></div>
+
       <!-- Estado vacío -->
       <div id="estado-vacio" class="hidden text-center py-12 px-4 spotlight-card rounded-2xl max-w-md mx-auto mt-6">
         <div class="w-12 h-12 rounded-full bg-carbon-800 text-brand flex items-center justify-center mx-auto mb-3">
           <i data-lucide="car" class="w-6 h-6"></i>
         </div>
         <h3 class="font-display font-bold text-base text-white">No se encontraron trabajos</h3>
-        <p class="text-zinc-400 text-xs mt-1">Prueba con otra palabra en el buscador o revisa los filtros.</p>
+        <p class="text-zinc-400 text-xs mt-1">Prueba con otra palabra en el buscador.</p>
       </div>
 
     </div>
@@ -804,6 +789,12 @@
             </div>
 
             <div>
+              <label class="block text-[11px] font-semibold text-zinc-300 uppercase mb-1">Fecha de Entrega</label>
+              <input type="date" id="admin-fecha" required
+                     class="w-full px-3 py-2 rounded-lg bg-carbon-950 border border-zinc-800 text-white text-xs focus:border-brand focus:outline-none">
+            </div>
+
+            <div>
               <label class="block text-[11px] font-semibold text-zinc-300 uppercase mb-1">Descripción del Arreglo Realizado</label>
               <textarea id="admin-descripcion" required rows="2" placeholder="Ej: Cambio de kit de distribución y service completo..."
                         class="w-full px-3 py-2 rounded-lg bg-carbon-950 border border-zinc-800 text-white text-xs focus:border-brand focus:outline-none resize-none"></textarea>
@@ -865,8 +856,9 @@
     let imagenBase64Procesada = null;
     let trabajoIdEnEdicion = null;
     let trabajosCargadosEnMemoria = [];
-    let filtroActivo = "todos";
     let busquedaActiva = "";
+    let paginaActual = 1;
+    const ITEMS_POR_PAGINA = 9;
 
     // Control de Menú Hamburguesa Móvil
     const btnMenuMovil = document.getElementById("btn-menu-movil");
@@ -972,19 +964,13 @@
       const grid = document.getElementById("grid-trabajos");
       const estadoVacio = document.getElementById("estado-vacio");
       const contador = document.getElementById("contador-trabajos");
+      const contenedorPaginacion = document.getElementById("paginacion-trabajos");
 
       const filtrados = trabajosCargadosEnMemoria.filter(item => {
-        const matchTexto = 
+        return (
           item.vehiculo.toLowerCase().includes(busquedaActiva) ||
-          item.descripcion.toLowerCase().includes(busquedaActiva);
-
-        if (filtroActivo === "todos") return matchTexto;
-
-        const matchFiltro = 
-          item.vehiculo.toLowerCase().includes(filtroActivo) ||
-          item.descripcion.toLowerCase().includes(filtroActivo);
-
-        return matchTexto && matchFiltro;
+          item.descripcion.toLowerCase().includes(busquedaActiva)
+        );
       });
 
       if(!grid) return;
@@ -993,13 +979,25 @@
       if (filtrados.length === 0) {
         if(estadoVacio) estadoVacio.classList.remove("hidden");
         if(contador) contador.innerText = `0 de ${trabajosCargadosEnMemoria.length} trabajos`;
+        if(contenedorPaginacion) contenedorPaginacion.innerHTML = "";
         return;
       }
 
       if(estadoVacio) estadoVacio.classList.add("hidden");
-      if(contador) contador.innerText = `Mostrando ${filtrados.length} de ${trabajosCargadosEnMemoria.length}`;
 
-      filtrados.forEach(item => {
+      const totalPaginas = Math.ceil(filtrados.length / ITEMS_POR_PAGINA) || 1;
+      if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+      if (paginaActual < 1) paginaActual = 1;
+
+      const inicio = (paginaActual - 1) * ITEMS_POR_PAGINA;
+      const fin = inicio + ITEMS_POR_PAGINA;
+      const itemsPagina = filtrados.slice(inicio, fin);
+
+      if(contador) {
+        contador.innerText = `Mostrando ${itemsPagina.length} de ${filtrados.length} (Pág. ${paginaActual}/${totalPaginas})`;
+      }
+
+      itemsPagina.forEach(item => {
         const card = document.createElement("div");
         card.className = "spotlight-card rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between cursor-pointer reveal active";
         
@@ -1042,8 +1040,64 @@
         grid.appendChild(card);
       });
 
+      renderizarPaginacion(totalPaginas);
       inicializarSpotlight();
       lucide.createIcons();
+    }
+
+    function renderizarPaginacion(totalPaginas) {
+      const contenedor = document.getElementById("paginacion-trabajos");
+      if (!contenedor) return;
+      contenedor.innerHTML = "";
+
+      if (totalPaginas <= 1) return;
+
+      // Botón Anterior
+      const btnPrev = document.createElement("button");
+      btnPrev.disabled = paginaActual === 1;
+      btnPrev.className = `px-3 py-2 rounded-xl border text-xs font-semibold flex items-center gap-1 transition ${
+        paginaActual === 1
+          ? "bg-carbon-900/50 border-white/5 text-zinc-600 cursor-not-allowed"
+          : "bg-carbon-850 hover:bg-carbon-800 border-white/10 text-zinc-300 hover:text-white"
+      }`;
+      btnPrev.innerHTML = `<i data-lucide="chevron-left" class="w-4 h-4"></i><span>Anterior</span>`;
+      btnPrev.onclick = () => cambiarPagina(paginaActual - 1);
+      contenedor.appendChild(btnPrev);
+
+      // Números de página
+      for (let i = 1; i <= totalPaginas; i++) {
+        const btnNum = document.createElement("button");
+        const esActiva = i === paginaActual;
+        btnNum.className = `w-9 h-9 rounded-xl text-xs font-bold transition flex items-center justify-center ${
+          esActiva
+            ? "bg-brand text-white shadow-lg shadow-brand/30"
+            : "bg-carbon-850 hover:bg-carbon-800 border border-white/10 text-zinc-400 hover:text-white"
+        }`;
+        btnNum.innerText = i;
+        btnNum.onclick = () => cambiarPagina(i);
+        contenedor.appendChild(btnNum);
+      }
+
+      // Botón Siguiente
+      const btnNext = document.createElement("button");
+      btnNext.disabled = paginaActual === totalPaginas;
+      btnNext.className = `px-3 py-2 rounded-xl border text-xs font-semibold flex items-center gap-1 transition ${
+        paginaActual === totalPaginas
+          ? "bg-carbon-900/50 border-white/5 text-zinc-600 cursor-not-allowed"
+          : "bg-carbon-850 hover:bg-carbon-800 border-white/10 text-zinc-300 hover:text-white"
+      }`;
+      btnNext.innerHTML = `<span>Siguiente</span><i data-lucide="chevron-right" class="w-4 h-4"></i>`;
+      btnNext.onclick = () => cambiarPagina(paginaActual + 1);
+      contenedor.appendChild(btnNext);
+    }
+
+    function cambiarPagina(nuevaPagina) {
+      paginaActual = nuevaPagina;
+      renderizarGridFiltrado();
+      const seccionTrabajos = document.getElementById("trabajos");
+      if (seccionTrabajos) {
+        seccionTrabajos.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
     function abrirDetalleModal(item) {
@@ -1071,18 +1125,8 @@
 
     document.getElementById("input-buscar-trabajo")?.addEventListener("input", (e) => {
       busquedaActiva = e.target.value.toLowerCase().trim();
+      paginaActual = 1;
       renderizarGridFiltrado();
-    });
-
-    document.querySelectorAll(".filtro-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".filtro-btn").forEach(b => {
-          b.className = "filtro-btn px-2.5 py-1.5 rounded-lg bg-carbon-850 hover:bg-carbon-800 text-zinc-400 hover:text-white font-medium transition shrink-0";
-        });
-        btn.className = "filtro-btn px-2.5 py-1.5 rounded-lg bg-brand text-white font-semibold transition shrink-0";
-        filtroActivo = btn.dataset.filtro;
-        renderizarGridFiltrado();
-      });
     });
 
     document.querySelectorAll(".chip-servicio").forEach(chip => {
@@ -1170,6 +1214,7 @@
         vistaLogin.classList.add("hidden");
         vistaGestion.classList.remove("hidden");
         errorPass.classList.add("hidden");
+        document.getElementById("admin-fecha").value = new Date().toISOString().split("T")[0];
         cargarTrabajos();
         mostrarToast("Bienvenido al Panel de Control", "exito");
       } else {
@@ -1219,6 +1264,7 @@
     function resetearFormularioAdmin() {
       trabajoIdEnEdicion = null;
       document.getElementById("form-nuevo-trabajo").reset();
+      document.getElementById("admin-fecha").value = new Date().toISOString().split("T")[0];
       document.getElementById("btn-quitar-foto").click();
       tituloFormAdmin.innerHTML = `<i data-lucide="plus-circle" class="w-4 h-4 text-brand"></i><span>Publicar Nuevo Trabajo</span>`;
       btnGuardarTrabajo.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Publicar Auto en la Web</span>`;
@@ -1232,6 +1278,8 @@
       btnGuardarTrabajo.innerHTML = `<span class="animate-spin mr-2">⏳</span> Guardando...`;
 
       const vehiculo = document.getElementById("admin-vehiculo").value.trim();
+      const fechaInput = document.getElementById("admin-fecha").value;
+      const fechaEntregaISO = fechaInput ? new Date(fechaInput + "T12:00:00").toISOString() : new Date().toISOString();
       const descripcion = document.getElementById("admin-descripcion").value.trim();
       const urlInput = document.getElementById("admin-foto-url").value.trim();
       const imagenFinal = imagenBase64Procesada || urlInput || "logo.jpg";
@@ -1240,14 +1288,14 @@
         if (trabajoIdEnEdicion) {
           const { error } = await db
             .from(TABLA_NAME)
-            .update({ vehiculo, descripcion, imagen_url: imagenFinal })
+            .update({ vehiculo, descripcion, imagen_url: imagenFinal, created_at: fechaEntregaISO })
             .eq("id", trabajoIdEnEdicion);
 
           if (error) throw error;
           mostrarToast("¡Publicación editada con éxito!", "exito");
         } else {
           const { error } = await db.from(TABLA_NAME).insert([
-            { vehiculo, descripcion, imagen_url: imagenFinal }
+            { vehiculo, descripcion, imagen_url: imagenFinal, created_at: fechaEntregaISO }
           ]);
 
           if (error) throw error;
@@ -1307,6 +1355,16 @@
       trabajoIdEnEdicion = id;
       document.getElementById("admin-vehiculo").value = item.vehiculo;
       document.getElementById("admin-descripcion").value = item.descripcion;
+
+      if (item.created_at) {
+        const d = new Date(item.created_at);
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, "0");
+        const dd = String(d.getDate()).padStart(2, "0");
+        document.getElementById("admin-fecha").value = `${yyyy}-${mm}-${dd}`;
+      } else {
+        document.getElementById("admin-fecha").value = new Date().toISOString().split("T")[0];
+      }
 
       imagenBase64Procesada = item.imagen_url;
       document.getElementById("img-preview").src = item.imagen_url;
