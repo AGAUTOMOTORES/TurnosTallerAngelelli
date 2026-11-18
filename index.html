@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://eurqojdpcggjsjrxddfg.supabase.co https://unpkg.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self';">
   <title>Taller Angelelli | Mecánica y Servicios Automotores</title>
   <meta name="description" content="Taller mecánico automotor de alta precisión en La Rioja. Inyección electrónica, Common Rail, mecánica general, cajas de cambios, repros, DPF y EGR.">
   
@@ -189,7 +191,7 @@
           <i data-lucide="map-pin" class="w-4 h-4 text-brand"></i> Ubicación y Horarios
         </a>
       </nav>
-      <a href="https://wa.me/5493804374962?text=Hola%20Taller%20Angelelli,%20tengo%20una%20consulta" target="_blank"
+      <a href="https://wa.me/5493804374962?text=Hola%20Taller%20Angelelli,%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer"
          class="w-full py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md">
         <i data-lucide="message-circle" class="w-4 h-4"></i> Contactar por WhatsApp
       </a>
@@ -788,7 +790,7 @@
             <i data-lucide="badge-check" class="w-4 h-4"></i>
             <span>Garantía asegurada en todos nuestros trabajos</span>
           </div>
-          <a id="modal-detalle-btn-wa" href="#" target="_blank"
+          <a id="modal-detalle-btn-wa" href="#" target="_blank" rel="noopener noreferrer"
              class="w-full sm:w-auto px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
             <i data-lucide="message-circle" class="w-4 h-4"></i>
             <span>Consultar por este trabajo</span>
@@ -825,19 +827,25 @@
 
         <form id="form-login-admin" class="mt-5 max-w-xs mx-auto space-y-3">
           <div>
-            <input type="password" id="input-password-admin" placeholder="Contraseña..." required
+            <input type="password" id="input-password-admin" placeholder="Contraseña..." required autocomplete="current-password"
                    class="w-full px-3.5 py-2.5 rounded-xl bg-carbon-950 border border-zinc-700 text-white text-center tracking-widest text-sm focus:border-brand focus:outline-none">
           </div>
-          <button type="submit"
+          <button type="submit" id="btn-login-admin"
                   class="w-full py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-xs tracking-wide uppercase transition shadow-lg shadow-brand/20">
             Ingresar al Panel
           </button>
-          <p id="error-password-admin" class="text-xs text-red-400 hidden">Contraseña incorrecta. Inténtalo de nuevo.</p>
+          <p id="error-password-admin" class="text-xs text-red-400 hidden">Contraseña incorrecta o sin autorización.</p>
         </form>
       </div>
 
       <!-- Vista 2: Gestión -->
       <div id="vista-gestion-admin" class="p-5 overflow-y-auto space-y-6 hidden">
+        <div class="flex items-center justify-between bg-carbon-850/60 px-3.5 py-2 rounded-xl border border-white/5">
+          <span id="admin-user-email" class="text-[11px] text-emerald-400 font-semibold truncate">Sesión activa</span>
+          <button type="button" id="btn-logout-admin" class="text-[11px] text-zinc-300 hover:text-white px-2.5 py-1 rounded-lg bg-carbon-950 border border-white/10 transition">
+            Cerrar Sesión
+          </button>
+        </div>
         <div class="p-4 rounded-xl bg-carbon-850 border border-white/5 space-y-3">
           <div class="flex items-center justify-between">
             <h4 id="titulo-form-admin" class="font-display font-bold text-sm text-white flex items-center gap-2">
@@ -920,13 +928,30 @@
     const { createClient } = supabase;
     const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const ADMIN_PASSWORD_CORRECTA = "TA2026";
+    const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
+    const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
     let imagenBase64Procesada = null;
     let trabajoIdEnEdicion = null;
     let trabajosCargadosEnMemoria = [];
     let busquedaActiva = "";
     let paginaActual = 1;
     const ITEMS_POR_PAGINA = 9;
+
+    function sanitizeImageUrl(url) {
+      if (!url || typeof url !== "string") return "logo.jpg";
+      const trimmed = url.trim();
+      if (/^data:image\/(jpeg|jpg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(trimmed)) {
+        return trimmed;
+      }
+      if (trimmed === "logo.jpg") return trimmed;
+      try {
+        const parsed = new URL(trimmed);
+        if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+          return parsed.href;
+        }
+      } catch (_) {}
+      return "logo.jpg";
+    }
 
     // Control de Menú Hamburguesa Móvil
     const btnMenuMovil = document.getElementById("btn-menu-movil");
@@ -950,7 +975,10 @@
       const icon = tipo === "exito" ? "check-circle" : "alert-triangle";
 
       toast.className = `flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl ${bgColor} border backdrop-blur-md text-white text-xs font-semibold shadow-2xl transition-all duration-300 pointer-events-auto transform translate-y-2 opacity-0`;
-      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4"></i><span>${mensaje}</span>`;
+      toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4"></i>`;
+      const msgSpan = document.createElement("span");
+      msgSpan.textContent = mensaje;
+      toast.appendChild(msgSpan);
       
       container.appendChild(toast);
       lucide.createIcons();
@@ -1072,10 +1100,12 @@
         
         card.onclick = () => abrirDetalleModal(item);
 
+        const safeImg = sanitizeImageUrl(item.imagen_url);
+        const safeVehiculo = escapeHtml(item.vehiculo);
         card.innerHTML = `
           <div>
             <div class="relative h-40 sm:h-56 w-full overflow-hidden bg-carbon-950">
-              <img src="${item.imagen_url}" alt="${item.vehiculo}" 
+              <img src="${escapeHtml(safeImg)}" alt="${safeVehiculo}" 
                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                    loading="lazy"
                    onerror="this.src='logo.jpg'">
@@ -1170,7 +1200,7 @@
     }
 
     function abrirDetalleModal(item) {
-      document.getElementById("modal-detalle-img").src = item.imagen_url;
+      document.getElementById("modal-detalle-img").src = sanitizeImageUrl(item.imagen_url);
       document.getElementById("modal-detalle-titulo").innerText = item.vehiculo;
       document.getElementById("modal-detalle-desc").innerText = item.descripcion;
 
@@ -1225,7 +1255,7 @@
         `Quedo a la espera de su respuesta para coordinar día y horario. ¡Muchas gracias!`;
 
       mostrarToast("Abriendo WhatsApp con tu turno...", "exito");
-      window.open(`https://wa.me/5493804374962?text=${encodeURIComponent(mensaje)}`, "_blank");
+      window.open(`https://wa.me/5493804374962?text=${encodeURIComponent(mensaje)}`, "_blank", "noopener,noreferrer");
     });
 
     document.querySelectorAll(".faq-btn").forEach(btn => {
@@ -1260,16 +1290,36 @@
     const vistaLogin = document.getElementById("vista-login-admin");
     const vistaGestion = document.getElementById("vista-gestion-admin");
     const formLogin = document.getElementById("form-login-admin");
+    const ADMIN_EMAIL = "admin@tallerangelelli.com";
     const inputPass = document.getElementById("input-password-admin");
+    const btnLoginAdmin = document.getElementById("btn-login-admin");
     const errorPass = document.getElementById("error-password-admin");
+    const btnLogoutAdmin = document.getElementById("btn-logout-admin");
+    const adminUserEmail = document.getElementById("admin-user-email");
     const btnCancelarEdicion = document.getElementById("btn-cancelar-edicion");
     const tituloFormAdmin = document.getElementById("titulo-form-admin");
     const btnGuardarTrabajo = document.getElementById("btn-guardar-trabajo");
 
-    document.getElementById("btn-abrir-admin").addEventListener("click", () => {
+    function mostrarVistaAdmin(session) {
+      if (session && session.user) {
+        vistaLogin.classList.add("hidden");
+        vistaGestion.classList.remove("hidden");
+        errorPass.classList.add("hidden");
+        if (adminUserEmail) adminUserEmail.textContent = `Sesión: ${session.user.email || "Admin"}`;
+        document.getElementById("admin-fecha").value = new Date().toISOString().split("T")[0];
+        cargarTrabajos();
+      } else {
+        vistaGestion.classList.add("hidden");
+        vistaLogin.classList.remove("hidden");
+      }
+    }
+
+    document.getElementById("btn-abrir-admin").addEventListener("click", async () => {
       modalAdmin.classList.remove("hidden");
       modalAdmin.classList.add("flex");
-      inputPass.focus();
+      const { data: { session } } = await db.auth.getSession();
+      mostrarVistaAdmin(session);
+      if (!session) inputPass.focus();
     });
 
     document.getElementById("btn-cerrar-admin").addEventListener("click", () => {
@@ -1277,24 +1327,54 @@
       modalAdmin.classList.remove("flex");
     });
 
-    formLogin.addEventListener("submit", (e) => {
+    formLogin.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (inputPass.value === ADMIN_PASSWORD_CORRECTA) {
-        vistaLogin.classList.add("hidden");
-        vistaGestion.classList.remove("hidden");
-        errorPass.classList.add("hidden");
-        document.getElementById("admin-fecha").value = new Date().toISOString().split("T")[0];
-        cargarTrabajos();
+      errorPass.classList.add("hidden");
+      btnLoginAdmin.disabled = true;
+      btnLoginAdmin.innerText = "Verificando...";
+
+      try {
+        const { data, error } = await db.auth.signInWithPassword({
+          email: ADMIN_EMAIL,
+          password: inputPass.value
+        });
+        if (error || !data.session) {
+          throw error || new Error("Sin sesión");
+        }
+        inputPass.value = "";
+        mostrarVistaAdmin(data.session);
         mostrarToast("Bienvenido al Panel de Control", "exito");
-      } else {
+      } catch (err) {
         errorPass.classList.remove("hidden");
         inputPass.value = "";
+      } finally {
+        btnLoginAdmin.disabled = false;
+        btnLoginAdmin.innerText = "Ingresar al Panel";
       }
     });
+
+    if (btnLogoutAdmin) {
+      btnLogoutAdmin.addEventListener("click", async () => {
+        await db.auth.signOut();
+        resetearFormularioAdmin();
+        mostrarVistaAdmin(null);
+        mostrarToast("Sesión cerrada", "exito");
+      });
+    }
 
     document.getElementById("admin-foto-file").addEventListener("change", function(e) {
       const file = e.target.files[0];
       if (!file) return;
+      if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+        mostrarToast("Formato no permitido. Usa JPG, PNG o WEBP.", "error");
+        e.target.value = "";
+        return;
+      }
+      if (file.size > MAX_FILE_SIZE_BYTES) {
+        mostrarToast("La imagen supera el máximo de 10 MB.", "error");
+        e.target.value = "";
+        return;
+      }
 
       const reader = new FileReader();
       reader.onload = function(event) {
@@ -1351,7 +1431,7 @@
       const fechaEntregaISO = fechaInput ? new Date(fechaInput + "T12:00:00").toISOString() : new Date().toISOString();
       const descripcion = document.getElementById("admin-descripcion").value.trim();
       const urlInput = document.getElementById("admin-foto-url").value.trim();
-      const imagenFinal = imagenBase64Procesada || urlInput || "logo.jpg";
+      const imagenFinal = imagenBase64Procesada || (urlInput ? sanitizeImageUrl(urlInput) : "logo.jpg");
 
       try {
         if (trabajoIdEnEdicion) {
@@ -1397,21 +1477,24 @@
       }
 
       trabajos.forEach(t => {
+        const safeImg = sanitizeImageUrl(t.imagen_url);
         const row = document.createElement("div");
         row.className = "flex items-center justify-between p-2.5 rounded-xl bg-carbon-950 border border-white/5 gap-2.5";
         row.innerHTML = `
           <div class="flex items-center gap-2.5 overflow-hidden">
-            <img src="${t.imagen_url}" class="w-10 h-8 object-cover rounded border border-white/10 shrink-0" onerror="this.src='logo.jpg'">
+            <img src="${escapeHtml(safeImg)}" class="w-10 h-8 object-cover rounded border border-white/10 shrink-0" onerror="this.src='logo.jpg'">
             <div class="truncate">
               <h5 class="text-xs font-bold text-white truncate">${escapeHtml(t.vehiculo)}</h5>
               <p class="text-[10px] text-zinc-400 truncate">${escapeHtml(t.descripcion)}</p>
             </div>
           </div>
           <div class="flex items-center gap-1.5 shrink-0">
-            <button onclick="iniciarEdicion(${t.id})" class="px-2 py-1 rounded bg-blue-500/15 text-blue-400 text-[11px] font-semibold">Editar</button>
-            <button onclick="eliminarTrabajo(${t.id})" class="px-2 py-1 rounded bg-red-500/15 text-red-400 text-[11px] font-semibold">Eliminar</button>
+            <button type="button" class="btn-edit-row px-2 py-1 rounded bg-blue-500/15 text-blue-400 text-[11px] font-semibold">Editar</button>
+            <button type="button" class="btn-del-row px-2 py-1 rounded bg-red-500/15 text-red-400 text-[11px] font-semibold">Eliminar</button>
           </div>
         `;
+        row.querySelector(".btn-edit-row").addEventListener("click", () => iniciarEdicion(t.id));
+        row.querySelector(".btn-del-row").addEventListener("click", () => eliminarTrabajo(t.id));
         contenedor.appendChild(row);
       });
       lucide.createIcons();
@@ -1435,8 +1518,9 @@
         document.getElementById("admin-fecha").value = new Date().toISOString().split("T")[0];
       }
 
-      imagenBase64Procesada = item.imagen_url;
-      document.getElementById("img-preview").src = item.imagen_url;
+      const safeImg = sanitizeImageUrl(item.imagen_url);
+      imagenBase64Procesada = safeImg;
+      document.getElementById("img-preview").src = safeImg;
       document.getElementById("contenedor-preview").classList.remove("hidden");
       document.getElementById("admin-foto-url").value = "";
 
